@@ -30,11 +30,28 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormSubmitted(true);
-    // Here you would normally send the data to your backend
+
+    // Google Apps Script URL for form submissions
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzH4UMh4ZCJWZd35-r-4o5afxu8uawUnbyBfNSv4whxmInMwAB-5bh6V9kl3ZBwKyrL/exec';
+
+    try {
+      const response = await fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'no-cors'
+      });
+
+      setFormSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // Still show success message to user
+      setFormSubmitted(true);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
