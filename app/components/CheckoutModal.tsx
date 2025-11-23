@@ -136,7 +136,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-stone-900 border-2 border-blue-500/50 rounded-2xl max-w-4xl w-full my-8 shadow-2xl">
+      <div className="bg-stone-900 border-2 border-blue-500/50 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl my-8">
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 rounded-t-2xl flex justify-between items-center">
           <div>

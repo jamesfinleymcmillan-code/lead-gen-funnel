@@ -33,8 +33,8 @@ export default function ExitIntentPopup() {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-      <div className="bg-gradient-to-br from-stone-900 to-stone-950 border-2 border-blue-500 rounded-2xl max-w-2xl w-full p-8 md:p-12 relative animate-fade-in shadow-2xl">
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[100] flex items-center justify-center p-4 overflow-y-auto">
+      <div className="bg-gradient-to-br from-stone-900 to-stone-950 border-2 border-blue-500 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 md:p-12 relative animate-fade-in shadow-2xl my-8">
         {/* Close button */}
         <button
           onClick={() => setIsOpen(false)}
