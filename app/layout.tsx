@@ -13,8 +13,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Net Money - Exclusive Private Networking for Entrepreneurs",
-  description: "Join an exclusive community of high-performing entrepreneurs, investors, and business leaders. Network with the best, grow your wealth, and unlock opportunities.",
+  title: "Professional Web Development - Get A Website That Brings You Customers",
+  description: "Expert web development services for businesses. Custom websites, landing pages, and web applications built with Next.js. Fast delivery, affordable pricing, proven results.",
+  keywords: ["web development", "freelance web developer", "Next.js", "landing page design", "custom websites", "web design services"],
+  icons: {
+    icon: '/icon.svg?v=3',
+    apple: '/icon.svg?v=3',
+  },
+  openGraph: {
+    title: "Professional Web Development - Get A Website That Brings You Customers",
+    description: "Expert web development services for businesses. Custom websites, landing pages, and web applications built with Next.js.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
