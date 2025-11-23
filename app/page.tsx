@@ -1025,16 +1025,6 @@ export default function Home() {
                       jamesfinleymcmillan@gmail.com
                     </a>
                   </li>
-                  <li className="pt-2 text-xs sm:text-sm">
-                    <a
-                      href="https://github.com/jamesfinleymcmillan-code"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-blue-500 transition-colors"
-                    >
-                      GitHub Profile
-                    </a>
-                  </li>
                 </ul>
               </div>
             </div>
