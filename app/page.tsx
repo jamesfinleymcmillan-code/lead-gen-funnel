@@ -39,8 +39,8 @@ export default function Home() {
 
     setIsSubmitting(true);
 
-    // Google Apps Script URL - Replace with your own
-    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    // Google Apps Script URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzAqZ_FdzNB452eZ2bcSqGn3w0742xgzvZMGQ7Yjb_L2V95tX9YK3Y8zHfzcmOlprPUAQ/exec';
 
     try {
       const response = await fetch(scriptURL, {
