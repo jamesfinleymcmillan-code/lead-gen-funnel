@@ -222,7 +222,6 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
                       </div>
                       <div className="text-right ml-4">
                         <div className="font-bold text-blue-500">+${upsell.price}</div>
-                        <div className="text-xs text-stone-500">{upsell.priceRange}</div>
                       </div>
                     </div>
                   </div>

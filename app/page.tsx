@@ -106,7 +106,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 overflow-x-hidden">
       {/* Urgency Banner (A/B Test) */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 text-center">
         <p className="text-sm md:text-base font-semibold">
@@ -1020,12 +1020,12 @@ export default function Home() {
               <div>
                 <h4 className="text-stone-100 font-semibold mb-4">Contact</h4>
                 <ul className="space-y-2 text-stone-400 text-sm">
-                  <li>
-                    <a href="mailto:jamesfinleymcmillan@gmail.com" className="hover:text-blue-500 transition-colors break-all">
+                  <li className="break-words">
+                    <a href="mailto:jamesfinleymcmillan@gmail.com" className="hover:text-blue-500 transition-colors">
                       jamesfinleymcmillan@gmail.com
                     </a>
                   </li>
-                  <li className="pt-2">
+                  <li className="pt-2 break-words">
                     <a
                       href="https://github.com/jamesfinleymcmillan-code"
                       target="_blank"
