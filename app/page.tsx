@@ -97,14 +97,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950">
       {/* Urgency Banner */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 text-center">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 text-center">
         <p className="text-sm md:text-base font-semibold">
           🔥 Limited Time: Only <span className="bg-white/20 px-2 py-1 rounded">3 spots left</span> this month • Book this week and save 10%
         </p>
       </div>
 
       {/* Navigation */}
-      <nav className={`fixed top-12 left-0 right-0 z-50 transition-all duration-300 ${
+      <nav className={`fixed top-12 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled ? 'bg-stone-950/95 backdrop-blur-lg border-b border-stone-800' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -124,8 +124,8 @@ export default function Home() {
               <button onClick={() => scrollToSection('contact')} className="text-stone-300 hover:text-stone-100 transition-colors">
                 Contact
               </button>
-              <button onClick={() => scrollToSection('quote')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all hover:scale-105 font-medium shadow-lg shadow-blue-600/20">
-                Get Free Quote
+              <button onClick={() => scrollToSection('pricing')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all hover:scale-105 font-medium shadow-lg shadow-blue-600/20">
+                Start Project
               </button>
             </div>
 
@@ -156,8 +156,8 @@ export default function Home() {
               <button onClick={() => scrollToSection('contact')} className="block w-full text-left text-stone-300 hover:text-stone-100 transition-colors py-2">
                 Contact
               </button>
-              <button onClick={() => scrollToSection('quote')} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-colors font-medium mt-2">
-                Get Free Quote
+              <button onClick={() => scrollToSection('pricing')} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-colors font-medium mt-2">
+                Start Project
               </button>
             </div>
           )}
@@ -165,7 +165,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+      <section className="relative pt-40 pb-20 px-6 overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
