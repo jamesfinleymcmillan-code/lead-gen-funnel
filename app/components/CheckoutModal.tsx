@@ -58,7 +58,8 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
     email: '',
     phone: '',
     businessName: '',
-    projectDetails: ''
+    projectDetails: '',
+    inspirationWebsite: ''
   });
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -148,7 +149,8 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
         email: '',
         phone: '',
         businessName: '',
-        projectDetails: ''
+        projectDetails: '',
+        inspirationWebsite: ''
       });
       setSelectedUpsells([]);
     } catch (error) {
@@ -303,6 +305,20 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
                 className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors resize-none"
                 placeholder="Tell us about your business, what features you need, color preferences, etc."
               />
+            </div>
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-stone-300 mb-2">
+                Inspiration Website (Optional)
+              </label>
+              <input
+                type="url"
+                name="inspirationWebsite"
+                value={formData.inspirationWebsite}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
+                placeholder="https://example.com"
+              />
+              <p className="text-xs text-stone-500 mt-2">Share a link to a website whose design you love - helps us match your style</p>
             </div>
           </div>
 

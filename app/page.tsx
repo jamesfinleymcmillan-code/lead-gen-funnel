@@ -1020,12 +1020,12 @@ export default function Home() {
               <div>
                 <h4 className="text-stone-100 font-semibold mb-4">Contact</h4>
                 <ul className="space-y-2 text-stone-400 text-sm">
-                  <li className="break-words">
+                  <li className="break-all max-w-full overflow-hidden">
                     <a href="mailto:jamesfinleymcmillan@gmail.com" className="hover:text-blue-500 transition-colors">
                       jamesfinleymcmillan@gmail.com
                     </a>
                   </li>
-                  <li className="pt-2 break-words">
+                  <li className="pt-2 break-all max-w-full overflow-hidden">
                     <a
                       href="https://github.com/jamesfinleymcmillan-code"
                       target="_blank"
