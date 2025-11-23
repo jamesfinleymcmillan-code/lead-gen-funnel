@@ -4,12 +4,15 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import CheckoutModal from './components/CheckoutModal';
 import ExitIntentPopup from './components/ExitIntentPopup';
+import { getVariant, type Variant } from './utils/abtest';
+import { trackEvent, setUserProperty } from './components/GoogleAnalytics';
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState({ name: '', price: 0 });
+  const [variant, setVariant] = useState<Variant>('variant_a');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,6 +23,14 @@ export default function Home() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Set A/B test variant and track in GA4
+  useEffect(() => {
+    const userVariant = getVariant();
+    setVariant(userVariant);
+    setUserProperty('variant', userVariant);
+    trackEvent('ab_test_variant_view', { variant: userVariant });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,10 +107,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950">
-      {/* Urgency Banner */}
+      {/* Urgency Banner (A/B Test) */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 text-center">
         <p className="text-sm md:text-base font-semibold">
-          🔥 Limited Time: Only <span className="bg-white/20 px-2 py-1 rounded">3 spots left</span> this month • Book this week and save 10%
+          {variant === 'variant_a' ? (
+            <>🔥 Limited Time: Only <span className="bg-white/20 px-2 py-1 rounded">3 spots left</span> this month • Book this week and save 10%</>
+          ) : (
+            <>🔥 Limited Time: Only <span className="bg-white/20 px-2 py-1 rounded">2 spots left</span> this month • Book this week and save 10%</>
+          )}
         </p>
       </div>
 
@@ -473,7 +488,11 @@ export default function Home() {
                 </li>
               </ul>
 
-              <button onClick={() => { setSelectedPackage({ name: 'Basic', price: 500 }); setCheckoutOpen(true); }} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all hover:scale-105">
+              <button onClick={() => {
+                setSelectedPackage({ name: 'Basic', price: 500 });
+                setCheckoutOpen(true);
+                trackEvent('checkout_opened', { package: 'Basic', price: 500 });
+              }} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all hover:scale-105">
                 Start Project Now →
               </button>
             </div>
@@ -527,7 +546,11 @@ export default function Home() {
                 </li>
               </ul>
 
-              <button onClick={() => { setSelectedPackage({ name: 'Pro', price: 1000 }); setCheckoutOpen(true); }} className="w-full bg-white hover:bg-emerald-50 text-blue-700 py-3 rounded-lg font-bold transition-all hover:scale-105">
+              <button onClick={() => {
+                setSelectedPackage({ name: 'Pro', price: 1000 });
+                setCheckoutOpen(true);
+                trackEvent('checkout_opened', { package: 'Pro', price: 1000 });
+              }} className="w-full bg-white hover:bg-emerald-50 text-blue-700 py-3 rounded-lg font-bold transition-all hover:scale-105">
                 Start Project Now →
               </button>
             </div>
@@ -577,7 +600,11 @@ export default function Home() {
                 </li>
               </ul>
 
-              <button onClick={() => { setSelectedPackage({ name: 'Premium', price: 1800 }); setCheckoutOpen(true); }} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all hover:scale-105">
+              <button onClick={() => {
+                setSelectedPackage({ name: 'Premium', price: 1800 });
+                setCheckoutOpen(true);
+                trackEvent('checkout_opened', { package: 'Premium', price: 1800 });
+              }} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all hover:scale-105">
                 Start Project Now →
               </button>
             </div>

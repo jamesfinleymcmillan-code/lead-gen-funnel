@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import CountdownTimer, { isDiscountActive } from './CountdownTimer';
+import { trackEvent } from './GoogleAnalytics';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -50,6 +52,7 @@ const upsells: Upsell[] = [
 
 export default function CheckoutModal({ isOpen, onClose, packageName, basePrice }: CheckoutModalProps) {
   const [selectedUpsells, setSelectedUpsells] = useState<string[]>([]);
+  const [hasDiscount, setHasDiscount] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -58,6 +61,13 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
     projectDetails: ''
   });
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // Check if discount is active on mount and when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setHasDiscount(isDiscountActive());
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -69,11 +79,25 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
     );
   };
 
-  const calculateTotal = () => {
+  const calculateSubtotal = () => {
     const upsellTotal = upsells
       .filter(u => selectedUpsells.includes(u.id))
       .reduce((sum, u) => sum + u.price, 0);
     return basePrice + upsellTotal;
+  };
+
+  const calculateTotal = () => {
+    const subtotal = calculateSubtotal();
+    if (hasDiscount) {
+      return Math.round(subtotal * 0.9); // 10% off
+    }
+    return subtotal;
+  };
+
+  const getDiscountAmount = () => {
+    if (!hasDiscount) return 0;
+    const subtotal = calculateSubtotal();
+    return Math.round(subtotal * 0.1); // 10% discount amount
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -104,6 +128,14 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
           'Content-Type': 'application/json',
         },
         mode: 'no-cors'
+      });
+
+      // Track form submission in GA4
+      trackEvent('form_submitted', {
+        package: packageName,
+        total_price: calculateTotal(),
+        has_discount: hasDiscount,
+        upsells: selectedUpsells.join(',')
       });
 
       // Show success message or redirect to payment
@@ -277,10 +309,43 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
 
           {/* Total and Submit */}
           <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-lg">
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-emerald-50 text-lg">Total Investment</span>
-              <span className="text-4xl font-bold text-white">${calculateTotal()}</span>
+            {/* Countdown Timer (if discount active) */}
+            {hasDiscount && (
+              <div className="bg-white/10 border border-white/20 rounded-lg p-4 mb-4 text-center">
+                <p className="text-emerald-50 text-sm mb-2">🔥 Limited Time Offer!</p>
+                <p className="text-white font-bold text-lg mb-2">10% OFF expires in:</p>
+                <CountdownTimer
+                  className="text-3xl"
+                  onExpire={() => setHasDiscount(false)}
+                />
+              </div>
+            )}
+
+            {/* Pricing Breakdown */}
+            <div className="space-y-2 mb-4">
+              {hasDiscount && (
+                <div className="flex justify-between items-center text-emerald-50">
+                  <span>Subtotal:</span>
+                  <span className="line-through">${calculateSubtotal()}</span>
+                </div>
+              )}
+              {hasDiscount && (
+                <div className="flex justify-between items-center text-emerald-100 font-semibold">
+                  <span>10% Discount:</span>
+                  <span>-${getDiscountAmount()}</span>
+                </div>
+              )}
+              <div className="flex justify-between items-center pt-2 border-t border-white/20">
+                <span className="text-emerald-50 text-lg">Total Investment</span>
+                <span className="text-4xl font-bold text-white">${calculateTotal()}</span>
+              </div>
+              {hasDiscount && (
+                <p className="text-emerald-100 text-center text-sm font-semibold">
+                  You save ${getDiscountAmount()}!
+                </p>
+              )}
             </div>
+
             <button
               type="submit"
               disabled={isProcessing}
