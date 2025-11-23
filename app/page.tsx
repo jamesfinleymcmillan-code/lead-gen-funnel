@@ -106,7 +106,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden">
       {/* Urgency Banner (A/B Test) */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 text-center">
         <p className="text-sm md:text-base font-semibold">

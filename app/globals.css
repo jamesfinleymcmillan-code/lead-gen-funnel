@@ -13,12 +13,13 @@
 }
 
 html {
-  background: var(--background);
+  background: linear-gradient(to bottom right, #020617, #0f172a, #1e3a8a);
   min-height: 100%;
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(to bottom right, #020617, #0f172a, #1e3a8a);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
