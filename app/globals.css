@@ -12,6 +12,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  background: var(--background);
+  min-height: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -19,4 +24,5 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-height: 100vh;
 }

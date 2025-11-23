@@ -123,8 +123,8 @@ export default function Home() {
         scrolled ? 'bg-stone-950/95 backdrop-blur-lg border-b border-stone-800' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-stone-100 tracking-tight">
+          <div className="flex items-center justify-between h-10">
+            <div className="text-2xl font-bold text-stone-100 tracking-tight flex items-center">
               <span className="text-blue-500">Web</span>Dev Pro
             </div>
 
@@ -147,7 +147,7 @@ export default function Home() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-stone-300"
+              className="md:hidden text-stone-300 flex items-center"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {mobileMenuOpen ? (
