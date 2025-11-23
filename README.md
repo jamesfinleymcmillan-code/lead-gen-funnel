@@ -389,3 +389,4 @@ Case study example: Net Money Group - https://net-money-group.web.app
 **Questions?** Open an issue on GitHub or reach out.
 
 **Ready to get clients?** Deploy this funnel, set up your ads, and start capturing leads today.
+
