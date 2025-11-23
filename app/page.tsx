@@ -678,7 +678,7 @@ export default function Home() {
             </div>
 
             <a
-              href="https://calendly.com"
+              href="https://calendly.com/jamesfinleymcmillan/strategy-call"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white hover:bg-emerald-50 text-blue-700 px-8 py-4 rounded-lg font-bold text-lg transition-all hover:scale-105 shadow-xl"
