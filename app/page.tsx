@@ -52,6 +52,15 @@ export default function Home() {
         mode: 'no-cors'
       });
 
+      // Clear form data after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        businessType: '',
+        websiteUrl: '',
+        budget: ''
+      });
       setFormSubmitted(true);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -66,6 +75,18 @@ export default function Home() {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      businessType: '',
+      websiteUrl: '',
+      budget: ''
+    });
+    setFormSubmitted(false);
   };
 
   return (
@@ -611,7 +632,7 @@ export default function Home() {
                   </ul>
                 </div>
                 <button
-                  onClick={() => setFormSubmitted(false)}
+                  onClick={resetForm}
                   className="text-blue-500 hover:text-blue-400 font-medium"
                 >
                   Submit Another Request
