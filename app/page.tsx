@@ -283,16 +283,16 @@ export default function Home() {
                       </div>
                       <h4 className="text-lg font-semibold text-stone-100">Results</h4>
                     </div>
-                    <div className="grid grid-cols-3 gap-3 pl-10">
-                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-3 text-center">
+                    <div className="grid grid-cols-3 gap-2 pl-6 sm:gap-3 sm:pl-10">
+                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-2 sm:p-3 text-center">
                         <div className="text-xs text-stone-500 mb-1">Tech Stack</div>
                         <div className="text-sm font-semibold text-blue-400">Next.js</div>
                       </div>
-                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-3 text-center">
+                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-2 sm:p-3 text-center">
                         <div className="text-xs text-stone-500 mb-1">Integration</div>
                         <div className="text-sm font-semibold text-blue-400">Google Sheets</div>
                       </div>
-                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-3 text-center">
+                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-2 sm:p-3 text-center">
                         <div className="text-xs text-stone-500 mb-1">Design</div>
                         <div className="text-sm font-semibold text-blue-400">Mobile First</div>
                       </div>
@@ -1028,12 +1028,11 @@ export default function Home() {
                   <li className="pt-2 text-xs sm:text-sm">
                     <a
                       href="https://github.com/jamesfinleymcmillan-code"
-                      style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-blue-500 transition-colors"
                     >
-                      github.com/jamesfinleymcmillan-code
+                      GitHub Profile
                     </a>
                   </li>
                 </ul>
