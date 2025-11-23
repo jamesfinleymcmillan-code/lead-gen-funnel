@@ -1019,15 +1019,16 @@ export default function Home() {
 
               <div>
                 <h4 className="text-stone-100 font-semibold mb-4">Contact</h4>
-                <ul className="space-y-2 text-stone-400 text-sm">
-                  <li className="break-all max-w-full overflow-hidden">
-                    <a href="mailto:jamesfinleymcmillan@gmail.com" className="hover:text-blue-500 transition-colors">
+                <ul className="space-y-2 text-stone-400">
+                  <li className="text-xs sm:text-sm">
+                    <a href="mailto:jamesfinleymcmillan@gmail.com" className="hover:text-blue-500 transition-colors inline-block max-w-full" style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}>
                       jamesfinleymcmillan@gmail.com
                     </a>
                   </li>
-                  <li className="pt-2 break-all max-w-full overflow-hidden">
+                  <li className="pt-2 text-xs sm:text-sm">
                     <a
                       href="https://github.com/jamesfinleymcmillan-code"
+                      style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-blue-500 transition-colors"
