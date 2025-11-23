@@ -948,7 +948,7 @@ export default function Home() {
             <div className="bg-stone-900 border border-stone-800 rounded-xl p-6 hover:border-blue-500/50 transition-all">
               <h3 className="text-xl font-bold text-stone-100 mb-3">Can you help me with hosting and domain setup?</h3>
               <p className="text-stone-400">
-                Yes! All packages include deployment to Vercel (free hosting forever). If you need a custom domain, I can help you set that up for an additional $50 setup fee, or you can do it yourself following the simple instructions I'll provide.
+                Yes! All packages include free deployment and hosting setup. If you need a custom domain, I can help you set that up for an additional $50 setup fee, or you can do it yourself following the simple instructions I'll provide.
               </p>
             </div>
 
