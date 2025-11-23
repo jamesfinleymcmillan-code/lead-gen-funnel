@@ -69,7 +69,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950">
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-stone-950/95 backdrop-blur-lg border-b border-stone-800' : 'bg-transparent'
@@ -77,7 +77,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="text-2xl font-bold text-stone-100 tracking-tight">
-              <span className="text-emerald-500">Web</span>Dev Pro
+              <span className="text-blue-500">Web</span>Dev Pro
             </div>
 
             {/* Desktop Navigation */}
@@ -91,7 +91,7 @@ export default function Home() {
               <button onClick={() => scrollToSection('contact')} className="text-stone-300 hover:text-stone-100 transition-colors">
                 Contact
               </button>
-              <button onClick={() => scrollToSection('quote')} className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg transition-all hover:scale-105 font-medium shadow-lg shadow-emerald-600/20">
+              <button onClick={() => scrollToSection('quote')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all hover:scale-105 font-medium shadow-lg shadow-blue-600/20">
                 Get Free Quote
               </button>
             </div>
@@ -123,7 +123,7 @@ export default function Home() {
               <button onClick={() => scrollToSection('contact')} className="block w-full text-left text-stone-300 hover:text-stone-100 transition-colors py-2">
                 Contact
               </button>
-              <button onClick={() => scrollToSection('quote')} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg transition-colors font-medium mt-2">
+              <button onClick={() => scrollToSection('quote')} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-colors font-medium mt-2">
                 Get Free Quote
               </button>
             </div>
@@ -135,17 +135,17 @@ export default function Home() {
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative text-center">
-          <div className="inline-block mb-6 px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
-            <span className="text-emerald-400 text-sm font-medium">Professional Web Development Services</span>
+          <div className="inline-block mb-6 px-4 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full">
+            <span className="text-blue-400 text-sm font-medium">Professional Web Development Services</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-extrabold text-stone-100 mb-6 leading-tight max-w-5xl mx-auto">
-            Get A Professional Website That <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">Actually Brings You Customers</span>
+            Get A Professional Website That <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">Actually Brings You Customers</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-stone-300 mb-10 leading-relaxed max-w-3xl mx-auto">
@@ -154,7 +154,7 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <button onClick={() => scrollToSection('work')} className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg transition-all hover:scale-105 font-semibold text-lg shadow-lg shadow-emerald-600/20">
+            <button onClick={() => scrollToSection('work')} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg transition-all hover:scale-105 font-semibold text-lg shadow-lg shadow-blue-600/20">
               See My Work
             </button>
             <button onClick={() => scrollToSection('quote')} className="bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-100 px-8 py-4 rounded-lg transition-all hover:scale-105 font-semibold text-lg">
@@ -165,16 +165,16 @@ export default function Home() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-emerald-500 mb-2">10+</div>
-              <div className="text-sm md:text-base text-stone-400">Clients Served</div>
+              <div className="text-4xl md:text-5xl font-bold text-blue-500 mb-2">5+</div>
+              <div className="text-sm md:text-base text-stone-400">Projects Completed</div>
             </div>
             <div className="text-center border-l border-r border-stone-800">
-              <div className="text-4xl md:text-5xl font-bold text-emerald-500 mb-2">$100K+</div>
-              <div className="text-sm md:text-base text-stone-400">Revenue Generated</div>
+              <div className="text-4xl md:text-5xl font-bold text-blue-500 mb-2">100%</div>
+              <div className="text-sm md:text-base text-stone-400">Client Satisfaction</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-emerald-500 mb-2">48-Hour</div>
-              <div className="text-sm md:text-base text-stone-400">Delivery</div>
+              <div className="text-4xl md:text-5xl font-bold text-blue-500 mb-2">Fast</div>
+              <div className="text-sm md:text-base text-stone-400">Turnaround</div>
             </div>
           </div>
         </div>
@@ -185,7 +185,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-stone-100 mb-4">
-              Featured <span className="text-emerald-500">Case Study</span>
+              Featured <span className="text-blue-500">Case Study</span>
             </h2>
             <p className="text-xl text-stone-400">Real results from real projects</p>
           </div>
@@ -194,8 +194,8 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-0">
               {/* Left Side - Project Details */}
               <div className="p-8 md:p-12">
-                <div className="inline-block mb-4 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
-                  <span className="text-emerald-400 text-sm font-medium">Net Money Group</span>
+                <div className="inline-block mb-4 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full">
+                  <span className="text-blue-400 text-sm font-medium">Net Money Group</span>
                 </div>
 
                 <h3 className="text-3xl font-bold text-stone-100 mb-6">Exclusive Networking Platform</h3>
@@ -215,8 +215,8 @@ export default function Home() {
                   {/* After */}
                   <div>
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                        <svg className="w-5 h-5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                        <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       </div>
@@ -228,23 +228,23 @@ export default function Home() {
                   {/* Results */}
                   <div>
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                        <span className="text-emerald-500 font-bold">✓</span>
+                      <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                        <span className="text-blue-500 font-bold">✓</span>
                       </div>
                       <h4 className="text-lg font-semibold text-stone-100">Results</h4>
                     </div>
                     <div className="grid grid-cols-3 gap-3 pl-10">
                       <div className="bg-stone-950 border border-stone-800 rounded-lg p-3">
                         <div className="text-xs text-stone-500 mb-1">Tech Stack</div>
-                        <div className="text-sm font-semibold text-emerald-400">Next.js</div>
+                        <div className="text-sm font-semibold text-blue-400">Next.js</div>
                       </div>
                       <div className="bg-stone-950 border border-stone-800 rounded-lg p-3">
                         <div className="text-xs text-stone-500 mb-1">Integration</div>
-                        <div className="text-sm font-semibold text-emerald-400">Google Sheets</div>
+                        <div className="text-sm font-semibold text-blue-400">Google Sheets</div>
                       </div>
                       <div className="bg-stone-950 border border-stone-800 rounded-lg p-3">
                         <div className="text-xs text-stone-500 mb-1">Design</div>
-                        <div className="text-sm font-semibold text-emerald-400">Mobile First</div>
+                        <div className="text-sm font-semibold text-blue-400">Mobile First</div>
                       </div>
                     </div>
                   </div>
@@ -254,7 +254,7 @@ export default function Home() {
                   href="https://net-money-group.web.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-emerald-500 hover:text-emerald-400 font-medium transition-colors"
+                  className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-400 font-medium transition-colors"
                 >
                   View Live Site
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -285,7 +285,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-stone-100 mb-4">
-              Simple, <span className="text-emerald-500">Transparent</span> Pricing
+              Simple, <span className="text-blue-500">Transparent</span> Pricing
             </h2>
             <p className="text-xl text-stone-400 max-w-2xl mx-auto">
               Choose the package that fits your needs. All packages include mobile-responsive design and clean code.
@@ -294,38 +294,38 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Basic Package */}
-            <div className="bg-stone-900 border border-stone-800 rounded-2xl p-8 hover:border-emerald-600/50 transition-all">
-              <div className="text-emerald-500 font-semibold mb-2">Basic</div>
+            <div className="bg-stone-900 border border-stone-800 rounded-2xl p-8 hover:border-blue-600/50 transition-all">
+              <div className="text-blue-500 font-semibold mb-2">Basic</div>
               <div className="text-4xl font-bold text-stone-100 mb-2">$500</div>
               <p className="text-stone-400 mb-6">Perfect for small businesses</p>
 
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">Professional landing page</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">Mobile responsive design</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">Up to 5 pages</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">Basic SEO setup</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">5-day delivery</span>
@@ -338,9 +338,9 @@ export default function Home() {
             </div>
 
             {/* Pro Package (Featured) */}
-            <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 border-2 border-emerald-500 rounded-2xl p-8 relative transform scale-105">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 border-2 border-blue-500 rounded-2xl p-8 relative transform scale-105">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-emerald-400 text-stone-950 px-4 py-1 rounded-full text-sm font-bold">MOST POPULAR</span>
+                <span className="bg-blue-400 text-stone-950 px-4 py-1 rounded-full text-sm font-bold">MOST POPULAR</span>
               </div>
 
               <div className="text-emerald-100 font-semibold mb-2">Pro</div>
@@ -386,50 +386,50 @@ export default function Home() {
                 </li>
               </ul>
 
-              <button onClick={() => scrollToSection('quote')} className="w-full bg-white hover:bg-emerald-50 text-emerald-700 py-3 rounded-lg font-bold transition-colors">
+              <button onClick={() => scrollToSection('quote')} className="w-full bg-white hover:bg-emerald-50 text-blue-700 py-3 rounded-lg font-bold transition-colors">
                 Get Started
               </button>
             </div>
 
             {/* Premium Package */}
-            <div className="bg-stone-900 border border-stone-800 rounded-2xl p-8 hover:border-emerald-600/50 transition-all">
-              <div className="text-emerald-500 font-semibold mb-2">Premium</div>
+            <div className="bg-stone-900 border border-stone-800 rounded-2xl p-8 hover:border-blue-600/50 transition-all">
+              <div className="text-blue-500 font-semibold mb-2">Premium</div>
               <div className="text-4xl font-bold text-stone-100 mb-2">$2,000+</div>
               <p className="text-stone-400 mb-6">For enterprise solutions</p>
 
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300 font-medium">Everything in Pro, plus:</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">E-commerce functionality</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">Payment gateway integration</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">Advanced SEO optimization</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">Custom backend & API</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-stone-300">Priority support</span>
@@ -449,7 +449,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-stone-100 mb-4">
-              Get Your <span className="text-emerald-500">Free Quote</span>
+              Get Your <span className="text-blue-500">Free Quote</span>
             </h2>
             <p className="text-xl text-stone-400">
               Tell me about your project and I'll get back to you within 24 hours with a detailed quote and timeline.
@@ -470,7 +470,7 @@ export default function Home() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-emerald-600 transition-colors"
+                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
                     placeholder="John Smith"
                   />
                 </div>
@@ -486,7 +486,7 @@ export default function Home() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-emerald-600 transition-colors"
+                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -502,7 +502,7 @@ export default function Home() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-emerald-600 transition-colors"
+                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
                     placeholder="+1 (555) 000-0000"
                   />
                 </div>
@@ -517,7 +517,7 @@ export default function Home() {
                     required
                     value={formData.businessType}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-emerald-600 transition-colors"
+                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
                   >
                     <option value="">Select your business type</option>
                     <option value="ecommerce">E-commerce</option>
@@ -541,7 +541,7 @@ export default function Home() {
                     name="websiteUrl"
                     value={formData.websiteUrl}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-emerald-600 transition-colors"
+                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
                     placeholder="https://yourwebsite.com"
                   />
                 </div>
@@ -556,7 +556,7 @@ export default function Home() {
                     required
                     value={formData.budget}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-emerald-600 transition-colors"
+                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
                   >
                     <option value="">Select your budget range</option>
                     <option value="<$500">Less than $500</option>
@@ -569,7 +569,7 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-emerald-600/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   {isSubmitting ? 'Submitting...' : 'Get Free Quote'}
                 </button>
@@ -580,8 +580,8 @@ export default function Home() {
               </form>
             ) : (
               <div className="text-center py-8">
-                <div className="w-20 h-20 bg-emerald-600/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-20 h-20 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 </div>
@@ -593,26 +593,26 @@ export default function Home() {
                   <h4 className="text-lg font-semibold text-stone-100 mb-3">What Happens Next?</h4>
                   <ul className="text-left space-y-2 text-stone-400">
                     <li className="flex items-start gap-2">
-                      <span className="text-emerald-500 mt-1">1.</span>
+                      <span className="text-blue-500 mt-1">1.</span>
                       <span>I'll review your project requirements carefully</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-emerald-500 mt-1">2.</span>
+                      <span className="text-blue-500 mt-1">2.</span>
                       <span>You'll receive a detailed quote via email within 24 hours</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-emerald-500 mt-1">3.</span>
+                      <span className="text-blue-500 mt-1">3.</span>
                       <span>We'll schedule a call to discuss your vision and requirements</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-emerald-500 mt-1">4.</span>
+                      <span className="text-blue-500 mt-1">4.</span>
                       <span>Once approved, I'll start building your website immediately</span>
                     </li>
                   </ul>
                 </div>
                 <button
                   onClick={() => setFormSubmitted(false)}
-                  className="text-emerald-500 hover:text-emerald-400 font-medium"
+                  className="text-blue-500 hover:text-blue-400 font-medium"
                 >
                   Submit Another Request
                 </button>
@@ -625,7 +625,7 @@ export default function Home() {
       {/* Calendly Section */}
       <section id="contact" className="py-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-12 md:p-16">
+          <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-12 md:p-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Ready to Get Started?
             </h2>
@@ -660,7 +660,7 @@ export default function Home() {
               href="https://calendly.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white hover:bg-emerald-50 text-emerald-700 px-8 py-4 rounded-lg font-bold text-lg transition-all hover:scale-105 shadow-xl"
+              className="inline-flex items-center gap-2 bg-white hover:bg-emerald-50 text-blue-700 px-8 py-4 rounded-lg font-bold text-lg transition-all hover:scale-105 shadow-xl"
             >
               Book Your Free Call
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -677,7 +677,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="text-2xl font-bold text-stone-100 mb-4">
-                <span className="text-emerald-500">Web</span>Dev Pro
+                <span className="text-blue-500">Web</span>Dev Pro
               </div>
               <p className="text-stone-400 leading-relaxed">
                 Professional web development services for businesses that want to grow online. Fast delivery, clean code, and measurable results.
@@ -688,16 +688,16 @@ export default function Home() {
               <h4 className="text-stone-100 font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
                 <li>
-                  <button onClick={() => scrollToSection('work')} className="text-stone-400 hover:text-emerald-500 transition-colors">Portfolio</button>
+                  <button onClick={() => scrollToSection('work')} className="text-stone-400 hover:text-blue-500 transition-colors">Portfolio</button>
                 </li>
                 <li>
-                  <button onClick={() => scrollToSection('pricing')} className="text-stone-400 hover:text-emerald-500 transition-colors">Pricing</button>
+                  <button onClick={() => scrollToSection('pricing')} className="text-stone-400 hover:text-blue-500 transition-colors">Pricing</button>
                 </li>
                 <li>
-                  <button onClick={() => scrollToSection('quote')} className="text-stone-400 hover:text-emerald-500 transition-colors">Get Quote</button>
+                  <button onClick={() => scrollToSection('quote')} className="text-stone-400 hover:text-blue-500 transition-colors">Get Quote</button>
                 </li>
                 <li>
-                  <button onClick={() => scrollToSection('contact')} className="text-stone-400 hover:text-emerald-500 transition-colors">Book a Call</button>
+                  <button onClick={() => scrollToSection('contact')} className="text-stone-400 hover:text-blue-500 transition-colors">Book a Call</button>
                 </li>
               </ul>
             </div>
@@ -709,17 +709,17 @@ export default function Home() {
                 <li>Phone: +1 (555) 123-4567</li>
                 <li className="pt-4">
                   <div className="flex gap-3">
-                    <a href="#" className="w-10 h-10 bg-stone-800 hover:bg-emerald-600 rounded-lg flex items-center justify-center transition-colors">
+                    <a href="#" className="w-10 h-10 bg-stone-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                       </svg>
                     </a>
-                    <a href="#" className="w-10 h-10 bg-stone-800 hover:bg-emerald-600 rounded-lg flex items-center justify-center transition-colors">
+                    <a href="#" className="w-10 h-10 bg-stone-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
                       </svg>
                     </a>
-                    <a href="#" className="w-10 h-10 bg-stone-800 hover:bg-emerald-600 rounded-lg flex items-center justify-center transition-colors">
+                    <a href="#" className="w-10 h-10 bg-stone-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
                       </svg>
