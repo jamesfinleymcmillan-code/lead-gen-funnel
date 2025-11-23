@@ -284,15 +284,15 @@ export default function Home() {
                       <h4 className="text-lg font-semibold text-stone-100">Results</h4>
                     </div>
                     <div className="grid grid-cols-3 gap-3 pl-10">
-                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-3">
+                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-3 text-center">
                         <div className="text-xs text-stone-500 mb-1">Tech Stack</div>
                         <div className="text-sm font-semibold text-blue-400">Next.js</div>
                       </div>
-                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-3">
+                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-3 text-center">
                         <div className="text-xs text-stone-500 mb-1">Integration</div>
                         <div className="text-sm font-semibold text-blue-400">Google Sheets</div>
                       </div>
-                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-3">
+                      <div className="bg-stone-950 border border-stone-800 rounded-lg p-3 text-center">
                         <div className="text-xs text-stone-500 mb-1">Design</div>
                         <div className="text-sm font-semibold text-blue-400">Mobile First</div>
                       </div>
