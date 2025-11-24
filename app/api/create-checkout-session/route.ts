@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
       {
         price_data: {
-          currency: 'usd',
+          currency: 'aud',
           product_data: {
             name: `${packageName} Package`,
             description: 'Professional website development',
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     selectedUpsells.forEach((upsell) => {
       lineItems.push({
         price_data: {
-          currency: 'usd',
+          currency: 'aud',
           product_data: {
             name: upsell.name,
             description: 'Add-on service',
