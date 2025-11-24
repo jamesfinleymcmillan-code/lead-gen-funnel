@@ -794,7 +794,7 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 px-6 bg-stone-900/30">
+      <section id="faq" className="py-24 px-6 bg-stone-900/30">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-stone-100 mb-4">
