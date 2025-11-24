@@ -15,19 +15,14 @@
 html {
   background-color: #020617;
   min-height: 100vh;
-  height: 100%;
 }
 
 body {
-  background-color: #020617;
   background: linear-gradient(to bottom right, #020617, #0f172a, #1e3a8a);
-  background-attachment: fixed;
-  background-size: cover;
   color: var(--foreground);
   font-family: ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   min-height: 100vh;
-  height: 100%;
 }
