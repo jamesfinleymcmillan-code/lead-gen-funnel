@@ -1,8 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
 import CountdownTimer, { isDiscountActive } from './CountdownTimer';
 import { trackEvent } from './GoogleAnalytics';
+
+// Initialize Stripe
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -105,8 +109,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
     e.preventDefault();
     setIsProcessing(true);
 
-    // Here you would integrate with Stripe
-    // For now, we'll send to Google Sheets and show confirmation
+    // Prepare order data for Google Sheets
     const orderData = {
       ...formData,
       package: packageName,
@@ -118,18 +121,28 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
       timestamp: new Date().toISOString()
     };
 
+    // Prepare upsell data for Stripe
+    const selectedUpsellData = selectedUpsells.map(id => {
+      const upsell = upsells.find(u => u.id === id);
+      return {
+        id: upsell!.id,
+        name: upsell!.name,
+        price: upsell!.price
+      };
+    });
+
     try {
-      // Send to Google Sheets
+      // Send to Google Sheets (keep existing tracking)
       const scriptURL = 'https://script.google.com/macros/s/AKfycbz2k02KLTWwsAuJ7Jm0PkAaZzqLyaQzO7RHvMjzIgeEIOBG-830mIvFw8hJb1f8nke5/exec';
 
-      await fetch(scriptURL, {
+      fetch(scriptURL, {
         method: 'POST',
         body: JSON.stringify(orderData),
         headers: {
           'Content-Type': 'application/json',
         },
         mode: 'no-cors'
-      });
+      }).catch(err => console.error('Google Sheets error:', err));
 
       // Track form submission in GA4
       trackEvent('form_submitted', {
@@ -139,24 +152,49 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
         upsells: selectedUpsells.join(',')
       });
 
-      // Show success message or redirect to payment
-      alert(`Order received! Total: $${calculateTotal()}. You'll receive a Stripe payment link via email within 5 minutes.`);
-      onClose();
-
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        businessName: '',
-        projectDetails: '',
-        inspirationWebsite: ''
+      // Create Stripe Checkout Session
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          packageName,
+          basePrice,
+          selectedUpsells: selectedUpsellData,
+          hasDiscount,
+          customerEmail: formData.email,
+          customerName: formData.name,
+          phone: formData.phone,
+          businessName: formData.businessName,
+          projectDetails: formData.projectDetails,
+          inspirationWebsite: formData.inspirationWebsite,
+        }),
       });
-      setSelectedUpsells([]);
+
+      if (!response.ok) {
+        throw new Error('Failed to create checkout session');
+      }
+
+      const { sessionId } = await response.json();
+
+      // Redirect to Stripe Checkout
+      const stripe = await stripePromise;
+      if (!stripe) {
+        throw new Error('Stripe failed to initialize');
+      }
+
+      const { error } = await stripe.redirectToCheckout({ sessionId });
+
+      if (error) {
+        throw error;
+      }
+
+      // Note: User will be redirected to Stripe, so code below won't execute
+      // Reset happens when they return from success page
     } catch (error) {
       console.error('Error:', error);
       alert('Something went wrong. Please try again or email jamesfinleymcmillan@gmail.com');
-    } finally {
       setIsProcessing(false);
     }
   };
@@ -366,10 +404,10 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
               disabled={isProcessing}
               className="w-full bg-white hover:bg-emerald-50 text-blue-700 py-4 rounded-lg font-bold text-lg transition-all hover:scale-105 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
-              {isProcessing ? 'Processing...' : 'Secure My Spot Now'}
+              {isProcessing ? 'Redirecting to secure checkout...' : 'Continue to Secure Checkout'}
             </button>
             <p className="text-center text-emerald-50 text-sm mt-4">
-              🔒 You'll receive a secure Stripe payment link via email within 5 minutes
+              🔒 Secure payment powered by Stripe
             </p>
             <p className="text-center text-emerald-100 text-xs mt-2">
               Full payment upfront • Work starts immediately after payment
