@@ -904,18 +904,7 @@ export default function Home() {
                     <button onClick={() => scrollToSection('quote')} className="text-stone-400 hover:text-blue-500 transition-colors">Get Quote</button>
                   </li>
                   <li>
-                    <button onClick={() => scrollToSection('contact')} className="text-stone-400 hover:text-blue-500 transition-colors">Book a Call</button>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="text-stone-100 font-semibold mb-4">Contact</h4>
-                <ul className="space-y-2 text-stone-400">
-                  <li className="text-xs sm:text-sm">
-                    <a href="mailto:jamesfinleymcmillan@gmail.com" className="hover:text-blue-500 transition-colors inline-block max-w-full" style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}>
-                      jamesfinleymcmillan@gmail.com
-                    </a>
+                    <button onClick={() => scrollToSection('contact')} className="text-stone-400 hover:text-blue-500 transition-colors">Contact</button>
                   </li>
                 </ul>
               </div>
