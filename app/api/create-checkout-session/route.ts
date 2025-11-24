@@ -116,7 +116,6 @@ export async function POST(req: NextRequest) {
         hasDiscount: hasDiscount.toString(),
         upsells: selectedUpsells.map(u => u.name).join(', '),
       },
-      allow_promotion_codes: true, // Allow users to enter promo codes
     });
 
     return NextResponse.json({ sessionId: session.id, url: session.url });
