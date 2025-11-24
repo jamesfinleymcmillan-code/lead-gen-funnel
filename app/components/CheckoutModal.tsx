@@ -105,18 +105,6 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
     e.preventDefault();
     setIsProcessing(true);
 
-    // Prepare order data for Google Sheets
-    const orderData = {
-      ...formData,
-      package: packageName,
-      basePrice,
-      selectedUpsells: selectedUpsells.map(id =>
-        upsells.find(u => u.id === id)?.name
-      ),
-      totalPrice: calculateTotal(),
-      timestamp: new Date().toISOString()
-    };
-
     // Prepare upsell data for Stripe
     const selectedUpsellData = selectedUpsells.map(id => {
       const upsell = upsells.find(u => u.id === id);
@@ -128,20 +116,8 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
     });
 
     try {
-      // Send to Google Sheets (keep existing tracking)
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbz2k02KLTWwsAuJ7Jm0PkAaZzqLyaQzO7RHvMjzIgeEIOBG-830mIvFw8hJb1f8nke5/exec';
-
-      fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify(orderData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'no-cors'
-      }).catch(err => console.error('Google Sheets error:', err));
-
-      // Track form submission in GA4
-      trackEvent('form_submitted', {
+      // Track checkout initiation in GA4
+      trackEvent('begin_checkout', {
         package: packageName,
         total_price: calculateTotal(),
         has_discount: hasDiscount,

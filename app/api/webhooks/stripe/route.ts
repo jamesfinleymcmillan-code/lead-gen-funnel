@@ -64,8 +64,8 @@ export async function POST(req: NextRequest) {
         timestamp: new Date().toISOString(),
       };
 
-      // Send to Google Sheets
-      const scriptURL = process.env.GOOGLE_SHEETS_WEBHOOK_URL || 'https://script.google.com/macros/s/AKfycbz2k02KLTWwsAuJ7Jm0PkAaZzqLyaQzO7RHvMjzIgeEIOBG-830mIvFw8hJb1f8nke5/exec';
+      // Send to Google Sheets (Orders sheet - for paid orders only)
+      const scriptURL = process.env.GOOGLE_SHEETS_ORDERS_URL || 'https://script.google.com/macros/s/AKfycbz2k02KLTWwsAuJ7Jm0PkAaZzqLyaQzO7RHvMjzIgeEIOBG-830mIvFw8hJb1f8nke5/exec';
 
       try {
         await fetch(scriptURL, {

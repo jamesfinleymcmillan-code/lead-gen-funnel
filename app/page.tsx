@@ -52,8 +52,8 @@ export default function Home() {
 
     setIsSubmitting(true);
 
-    // Google Apps Script URL
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx9rIZ2Vbd2iXpGfToPNA-WxrU0IiI8Uodu-hZMceoa3jGdn_gF-KJhMwhtImyEgjMX/exec';
+    // Google Apps Script URL for questions/contact form
+    const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_QUESTIONS_URL || 'https://script.google.com/macros/s/AKfycbx9rIZ2Vbd2iXpGfToPNA-WxrU0IiI8Uodu-hZMceoa3jGdn_gF-KJhMwhtImyEgjMX/exec';
 
     try {
       const response = await fetch(scriptURL, {
