@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-11-17.clover',
-});
+// Initialize Stripe lazily to avoid build-time errors
+const getStripe = () => {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2025-11-17.clover',
+  });
+};
 
 interface CheckoutRequestBody {
   packageName: string;
@@ -24,6 +27,7 @@ interface CheckoutRequestBody {
 
 export async function POST(req: NextRequest) {
   try {
+    const stripe = getStripe();
     const body: CheckoutRequestBody = await req.json();
 
     const {
