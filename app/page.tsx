@@ -69,10 +69,7 @@ export default function Home() {
       setFormData({
         name: '',
         email: '',
-        phone: '',
-        businessType: '',
-        websiteUrl: '',
-        budget: ''
+        message: ''
       });
       setFormSubmitted(true);
     } catch (error) {
