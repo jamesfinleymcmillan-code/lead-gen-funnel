@@ -34,20 +34,43 @@ function doPost(e) {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     const data = JSON.parse(e.postData.contents);
 
-    // Add row with timestamp
-    sheet.appendRow([
+    // Format phone number as text by prefixing with apostrophe
+    // This preserves + signs and leading zeros
+    const phoneFormatted = data.phone ? "'" + data.phone : '';
+
+    // Format prices as currency strings with $ sign
+    const basePriceFormatted = data.basePrice ? '$' + data.basePrice : '';
+    const totalPriceFormatted = data.totalPrice ? '$' + data.totalPrice : '';
+
+    // Add row with formatted data
+    const newRow = [
       new Date(),
       data.name || '',
       data.email || '',
-      data.phone || '',
+      phoneFormatted,
       data.businessName || '',
       data.package || '',
-      data.basePrice || '',
+      basePriceFormatted,
       Array.isArray(data.selectedUpsells) ? data.selectedUpsells.join(', ') : '',
-      data.totalPrice || '',
+      totalPriceFormatted,
       data.projectDetails || '',
       data.inspirationWebsite || ''
-    ]);
+    ];
+
+    sheet.appendRow(newRow);
+
+    // Get the row number that was just added
+    const lastRow = sheet.getLastRow();
+
+    // Format the timestamp column (A) as datetime
+    sheet.getRange(lastRow, 1).setNumberFormat('M/d/yyyy h:mm:ss');
+
+    // Format the phone column (D) as plain text (left-aligned)
+    sheet.getRange(lastRow, 4).setHorizontalAlignment('left');
+
+    // Format price columns (G, I) as left-aligned for consistency
+    sheet.getRange(lastRow, 7).setHorizontalAlignment('left');
+    sheet.getRange(lastRow, 9).setHorizontalAlignment('left');
 
     return ContentService.createTextOutput(JSON.stringify({ result: 'success' }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -106,6 +129,12 @@ function doPost(e) {
       data.message || ''
     ]);
 
+    // Get the row number that was just added
+    const lastRow = sheet.getLastRow();
+
+    // Format the timestamp column (A) as datetime
+    sheet.getRange(lastRow, 1).setNumberFormat('M/d/yyyy h:mm:ss');
+
     return ContentService.createTextOutput(JSON.stringify({ result: 'success' }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
@@ -138,6 +167,42 @@ Once you have both URLs, you need to update your website code:
 2. **For Questions (Contact Form)**: Update `app/page.tsx` line 56 with the NEW questions URL
 
 Let me know when you have both URLs and I'll update the code for you!
+
+---
+
+## Updating Existing Deployments
+
+If you've already deployed your Apps Scripts and need to update them with the improved formatting code:
+
+### For Both Sheets:
+
+1. Open the Google Sheet
+2. Click **Extensions** → **Apps Script**
+3. Replace the entire code with the updated version above
+4. Click **Deploy** → **Manage deployments**
+5. Click the **Edit** button (pencil icon) next to your existing deployment
+6. Under "Version", select **New version**
+7. Click **Deploy**
+
+**Important:** The Web App URL stays the same - you don't need to update your website code!
+
+---
+
+## Fixing Existing Data (One-Time Setup)
+
+If you already have data in your sheets with formatting issues, apply this one-time manual formatting:
+
+### For Orders Sheet:
+
+1. **Column A (Timestamp)**: Select column → Format → Number → Date time
+2. **Column D (Phone)**: Select column → Format → Number → Plain text → Format → Align → Left
+3. **Columns G & I (Prices)**: Select both columns → Format → Align → Left
+
+### For Questions Sheet:
+
+1. **Column A (Timestamp)**: Select column → Format → Number → Date time
+
+This fixes existing data. All new submissions will be automatically formatted correctly by the updated Apps Script!
 
 ---
 
