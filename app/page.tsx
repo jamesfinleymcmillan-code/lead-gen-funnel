@@ -891,10 +891,10 @@ export default function Home() {
                   <button onClick={() => scrollToSection('pricing')} className="text-stone-400 hover:text-blue-500 transition-colors">Pricing</button>
                 </li>
                 <li>
-                  <button onClick={() => scrollToSection('quote')} className="text-stone-400 hover:text-blue-500 transition-colors">Get Quote</button>
+                  <button onClick={() => scrollToSection('contact')} className="text-stone-400 hover:text-blue-500 transition-colors">Contact</button>
                 </li>
                 <li>
-                  <button onClick={() => scrollToSection('contact')} className="text-stone-400 hover:text-blue-500 transition-colors">Contact</button>
+                  <button onClick={() => scrollToSection('faq')} className="text-stone-400 hover:text-blue-500 transition-colors">FAQ</button>
                 </li>
               </ul>
             </div>
