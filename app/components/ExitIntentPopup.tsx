@@ -15,6 +15,11 @@ export default function ExitIntentPopup() {
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
+      // Don't show popup if user is being redirected to Stripe
+      if (sessionStorage.getItem('redirecting_to_stripe')) {
+        return;
+      }
+
       // Check if mouse is leaving from the top of the page
       if (e.clientY <= 0 && !hasShown) {
         setIsOpen(true);

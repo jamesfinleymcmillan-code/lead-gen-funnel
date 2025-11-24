@@ -696,7 +696,7 @@ export default function Home() {
       </section>
 
       {/* Contact Form */}
-      <section id="quote" className="py-24 px-6 bg-stone-900/30">
+      <section id="contact" className="py-24 px-6 bg-stone-900/30">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-stone-100 mb-4">

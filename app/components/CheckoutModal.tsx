@@ -1,12 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
 import CountdownTimer, { isDiscountActive } from './CountdownTimer';
 import { trackEvent } from './GoogleAnalytics';
-
-// Initialize Stripe
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -176,19 +172,17 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
         throw new Error('Failed to create checkout session');
       }
 
-      const { sessionId } = await response.json();
+      const { url } = await response.json();
 
-      // Redirect to Stripe Checkout
-      const stripe = await stripePromise;
-      if (!stripe) {
-        throw new Error('Stripe failed to initialize');
+      // Redirect to Stripe Checkout using the session URL
+      if (!url) {
+        throw new Error('No checkout URL returned');
       }
 
-      const { error } = await stripe.redirectToCheckout({ sessionId });
+      // Disable exit intent popup during redirect to Stripe
+      sessionStorage.setItem('redirecting_to_stripe', 'true');
 
-      if (error) {
-        throw error;
-      }
+      window.location.href = url;
 
       // Note: User will be redirected to Stripe, so code below won't execute
       // Reset happens when they return from success page
