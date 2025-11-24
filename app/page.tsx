@@ -900,12 +900,9 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="border-t border-stone-800 pt-8 text-center">
             <p className="text-stone-400 text-sm">
               © 2025 WebDev Pro. All rights reserved.
-            </p>
-            <p className="text-stone-500 text-sm">
-              Built with Next.js & Tailwind CSS
             </p>
           </div>
         </div>
