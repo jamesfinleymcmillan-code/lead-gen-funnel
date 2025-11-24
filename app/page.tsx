@@ -53,7 +53,7 @@ export default function Home() {
     setIsSubmitting(true);
 
     // Google Apps Script URL
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzAqZ_FdzNB452eZ2bcSqGn3w0742xgzvZMGQ7Yjb_L2V95tX9YK3Y8zHfzcmOlprPUAQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx9rIZ2Vbd2iXpGfToPNA-WxrU0IiI8Uodu-hZMceoa3jGdn_gF-KJhMwhtImyEgjMX/exec';
 
     try {
       const response = await fetch(scriptURL, {

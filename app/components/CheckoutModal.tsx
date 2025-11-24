@@ -120,7 +120,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
 
     try {
       // Send to Google Sheets
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbzAqZ_FdzNB452eZ2bcSqGn3w0742xgzvZMGQ7Yjb_L2V95tX9YK3Y8zHfzcmOlprPUAQ/exec';
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbz2k02KLTWwsAuJ7Jm0PkAaZzqLyaQzO7RHvMjzIgeEIOBG-830mIvFw8hJb1f8nke5/exec';
 
       await fetch(scriptURL, {
         method: 'POST',
