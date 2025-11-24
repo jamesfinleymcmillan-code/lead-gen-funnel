@@ -19,7 +19,7 @@ This guide walks you through setting up Google Analytics 4 and Stripe payment in
 ### Step 2: Create Property
 
 1. Property name: `Lead Gen Funnel` or `Your Business Website`
-2. Select your timezone and currency
+2. Select your timezone and currency (AUD - Australian Dollar)
 3. Click **"Next"**
 4. Choose business details (select what applies to you)
 5. Click **"Create"**
@@ -77,6 +77,8 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=G-ABC123DEF4
 2. Click **"Start now"** or **"Sign up"**
 3. Enter your email and create a password
 4. Complete the account setup (you can skip verification for testing)
+
+**Note:** Your site is configured to process payments in **AUD (Australian Dollars)**. Stripe will automatically handle currency conversion if needed.
 
 ### Step 2: Get Test API Keys
 
