@@ -115,6 +115,7 @@ export async function POST(req: NextRequest) {
         phone,
         businessName,
         packageName,
+        basePrice: basePrice.toString(),
         projectDetails: projectDetails || '',
         inspirationWebsite: inspirationWebsite || '',
         hasDiscount: hasDiscount.toString(),

@@ -38,6 +38,7 @@ export async function POST(req: NextRequest) {
         phone,
         businessName,
         packageName,
+        basePrice,
         projectDetails,
         inspirationWebsite,
         hasDiscount,
@@ -54,12 +55,12 @@ export async function POST(req: NextRequest) {
         phone: phone,
         businessName: businessName,
         package: packageName,
-        basePrice: '', // We don't have base price separate, but total is below
+        basePrice: basePrice || '',
         selectedUpsells: upsells ? upsells.split(', ') : [],
         totalPrice: amountPaid,
         projectDetails: projectDetails,
         inspirationWebsite: inspirationWebsite,
-        paymentStatus: 'PAID', // Mark as paid since this webhook only fires on successful payment
+        paymentStatus: 'PAID',
         stripeSessionId: session.id,
         timestamp: new Date().toISOString(),
       };
