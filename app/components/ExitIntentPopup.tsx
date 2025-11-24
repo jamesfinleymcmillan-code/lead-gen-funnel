@@ -1,10 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { getVariant, type Variant } from '../utils/abtest';
 
 export default function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasShown, setHasShown] = useState(false);
+  const [variant, setVariant] = useState<Variant>('variant_a');
+
+  // Get A/B test variant on mount
+  useEffect(() => {
+    setVariant(getVariant());
+  }, []);
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
@@ -92,7 +99,7 @@ export default function ExitIntentPopup() {
           </button>
 
           <p className="text-stone-500 text-sm">
-            This offer expires in 48 hours • Only 3 spots remaining
+            This offer expires in 48 hours • Only {variant === 'variant_a' ? '3' : '2'} spots remaining
           </p>
         </div>
       </div>
