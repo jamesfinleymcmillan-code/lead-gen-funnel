@@ -16,10 +16,7 @@ export default function Home() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    businessType: '',
-    websiteUrl: '',
-    budget: ''
+    message: ''
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -86,7 +83,7 @@ export default function Home() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -97,10 +94,7 @@ export default function Home() {
     setFormData({
       name: '',
       email: '',
-      phone: '',
-      businessType: '',
-      websiteUrl: '',
-      budget: ''
+      message: ''
     });
     setFormSubmitted(false);
   };
@@ -757,9 +751,9 @@ export default function Home() {
                     Your Question *
                   </label>
                   <textarea
-                    name="phone"
+                    name="message"
                     required
-                    value={formData.phone}
+                    value={formData.message}
                     onChange={handleChange}
                     rows={5}
                     className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors resize-none"
