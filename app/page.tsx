@@ -424,7 +424,7 @@ export default function Home() {
               Choose the package that fits your needs. All packages include mobile-responsive design and clean code.
             </p>
 
-            {/* Guarantee Badges */}
+            {/* Trust Badges */}
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <div className="flex items-center gap-2 bg-stone-900 border border-stone-800 rounded-lg px-4 py-2">
                 <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
@@ -441,9 +441,16 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-2 bg-stone-900 border border-stone-800 rounded-lg px-4 py-2">
                 <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                 </svg>
-                <span className="text-stone-300 font-medium text-sm">Secure Payment</span>
+                <span className="text-stone-300 font-medium text-sm">256-bit SSL Encryption</span>
+              </div>
+              <div className="flex items-center gap-2 bg-stone-900 border border-stone-800 rounded-lg px-4 py-2">
+                <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                  <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
+                </svg>
+                <span className="text-stone-300 font-medium text-sm">Secured by Stripe</span>
               </div>
             </div>
           </div>
@@ -697,15 +704,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Lead Capture Form */}
+      {/* Contact Form */}
       <section id="quote" className="py-24 px-6 bg-stone-900/30">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-stone-100 mb-4">
-              Get Your <span className="text-blue-500">Free Quote</span>
+              Have <span className="text-blue-500">Questions?</span>
             </h2>
             <p className="text-xl text-stone-400">
-              Tell me about your project and I'll get back to you within 24 hours with a detailed quote and timeline.
+              Not ready to start your project yet? Send me a message and I'll get back to you within 24 hours.
             </p>
           </div>
 
@@ -744,79 +751,20 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Phone */}
+                {/* Message */}
                 <div>
                   <label className="block text-sm font-medium text-stone-300 mb-2">
-                    Phone Number *
+                    Your Question *
                   </label>
-                  <input
-                    type="tel"
+                  <textarea
                     name="phone"
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
-                    placeholder="+1 (555) 000-0000"
+                    rows={5}
+                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors resize-none"
+                    placeholder="What would you like to know?"
                   />
-                </div>
-
-                {/* Business Type */}
-                <div>
-                  <label className="block text-sm font-medium text-stone-300 mb-2">
-                    Business Type *
-                  </label>
-                  <select
-                    name="businessType"
-                    required
-                    value={formData.businessType}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
-                  >
-                    <option value="">Select your business type</option>
-                    <option value="ecommerce">E-commerce</option>
-                    <option value="saas">SaaS / Tech Startup</option>
-                    <option value="service">Service Business</option>
-                    <option value="restaurant">Restaurant / Hospitality</option>
-                    <option value="real-estate">Real Estate</option>
-                    <option value="healthcare">Healthcare</option>
-                    <option value="education">Education</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                {/* Current Website URL (Optional) */}
-                <div>
-                  <label className="block text-sm font-medium text-stone-300 mb-2">
-                    Current Website URL (Optional)
-                  </label>
-                  <input
-                    type="url"
-                    name="websiteUrl"
-                    value={formData.websiteUrl}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
-                    placeholder="https://yourwebsite.com"
-                  />
-                </div>
-
-                {/* Budget Range */}
-                <div>
-                  <label className="block text-sm font-medium text-stone-300 mb-2">
-                    Budget Range *
-                  </label>
-                  <select
-                    name="budget"
-                    required
-                    value={formData.budget}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
-                  >
-                    <option value="">Select your budget range</option>
-                    <option value="<$500">Less than $500</option>
-                    <option value="$500-1000">$500 - $1,000</option>
-                    <option value="$1000-1800">$1,000 - $1,800</option>
-                    <option value="$1800+">$1,800+</option>
-                  </select>
                 </div>
 
                 <button
@@ -824,7 +772,7 @@ export default function Home() {
                   disabled={isSubmitting}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  {isSubmitting ? 'Submitting...' : 'Get Free Quote'}
+                  {isSubmitting ? 'Submitting...' : 'Send Message'}
                 </button>
 
                 <p className="text-xs text-stone-400 text-center">
@@ -838,65 +786,18 @@ export default function Home() {
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className="text-3xl font-bold text-stone-100 mb-4">Thank You!</h3>
+                <h3 className="text-3xl font-bold text-stone-100 mb-4">Message Sent!</h3>
                 <p className="text-lg text-stone-300 mb-6">
-                  I've received your request and will get back to you within 24 hours with a detailed quote and project timeline.
+                  Thanks for reaching out! I'll get back to you within 24 hours.
                 </p>
-                <div className="bg-stone-950 border border-stone-800 rounded-lg p-6 mb-6">
-                  <h4 className="text-lg font-semibold text-stone-100 mb-3">What Happens Next?</h4>
-                  <ul className="text-left space-y-2 text-stone-400">
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-500 mt-1">1.</span>
-                      <span>I'll review your project requirements carefully</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-500 mt-1">2.</span>
-                      <span>You'll receive a detailed quote via email within 24 hours</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-500 mt-1">3.</span>
-                      <span>We'll schedule a call to discuss your vision and requirements</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-500 mt-1">4.</span>
-                      <span>Once approved, I'll start building your website immediately</span>
-                    </li>
-                  </ul>
-                </div>
                 <button
                   onClick={resetForm}
                   className="text-blue-500 hover:text-blue-400 font-medium"
                 >
-                  Submit Another Request
+                  Send Another Message
                 </button>
               </div>
             )}
-          </div>
-        </div>
-      </section>
-
-      {/* Calendly Section */}
-      <section id="contact" className="py-24 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-12 md:p-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Get Started?
-            </h2>
-            <p className="text-xl text-emerald-50 mb-10 max-w-2xl mx-auto">
-              Book a free 15-minute strategy call to discuss your project. No pressure, no commitment - just a friendly conversation about how I can help grow your business.
-            </p>
-
-            <a
-              href="https://calendly.com/jamesfinleymcmillan/strategy-call"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white hover:bg-emerald-50 text-blue-700 px-8 py-4 rounded-lg font-bold text-lg transition-all hover:scale-105 shadow-xl"
-            >
-              Book Your Free Call
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
           </div>
         </div>
       </section>
