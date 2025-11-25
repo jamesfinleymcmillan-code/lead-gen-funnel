@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow success and cancel pages (not useful for SEO)
+Disallow: /success
+Disallow: /cancel
+
+# Sitemap location
+Sitemap: https://lead-gen-funnel.vercel.app/sitemap.xml

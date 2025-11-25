@@ -2,10 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import CheckoutModal from './components/CheckoutModal';
-import ExitIntentPopup from './components/ExitIntentPopup';
+import dynamic from 'next/dynamic';
 import { getVariant, type Variant } from './utils/abtest';
 import { trackEvent, setUserProperty } from './components/GoogleAnalytics';
+
+// Lazy load modals for better performance
+const CheckoutModal = dynamic(() => import('./components/CheckoutModal'), {
+  ssr: false,
+});
+const ExitIntentPopup = dynamic(() => import('./components/ExitIntentPopup'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
@@ -120,27 +127,30 @@ export default function Home() {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              <button onClick={() => scrollToSection('work')} className="text-stone-300 hover:text-stone-100 transition-colors">
+            <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+              <button onClick={() => scrollToSection('work')} className="text-stone-300 hover:text-stone-100 transition-colors" aria-label="View portfolio section">
                 Portfolio
               </button>
-              <button onClick={() => scrollToSection('pricing')} className="text-stone-300 hover:text-stone-100 transition-colors">
+              <button onClick={() => scrollToSection('pricing')} className="text-stone-300 hover:text-stone-100 transition-colors" aria-label="View pricing section">
                 Pricing
               </button>
-              <button onClick={() => scrollToSection('contact')} className="text-stone-300 hover:text-stone-100 transition-colors">
+              <button onClick={() => scrollToSection('contact')} className="text-stone-300 hover:text-stone-100 transition-colors" aria-label="View contact section">
                 Contact
               </button>
-              <button onClick={() => scrollToSection('pricing')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all hover:scale-105 font-medium shadow-lg shadow-blue-600/20">
+              <button onClick={() => scrollToSection('pricing')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all hover:scale-105 font-medium shadow-lg shadow-blue-600/20" aria-label="Start your project">
                 Start Project
               </button>
-            </div>
+            </nav>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden text-stone-300 flex items-center"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 {mobileMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -152,20 +162,20 @@ export default function Home() {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="md:hidden pt-4 pb-2 space-y-3">
-              <button onClick={() => scrollToSection('work')} className="block w-full text-left text-stone-300 hover:text-stone-100 transition-colors py-2">
+            <nav id="mobile-navigation" className="md:hidden pt-4 pb-2 space-y-3" aria-label="Mobile navigation">
+              <button onClick={() => scrollToSection('work')} className="block w-full text-left text-stone-300 hover:text-stone-100 transition-colors py-2" aria-label="View portfolio section">
                 Portfolio
               </button>
-              <button onClick={() => scrollToSection('pricing')} className="block w-full text-left text-stone-300 hover:text-stone-100 transition-colors py-2">
+              <button onClick={() => scrollToSection('pricing')} className="block w-full text-left text-stone-300 hover:text-stone-100 transition-colors py-2" aria-label="View pricing section">
                 Pricing
               </button>
-              <button onClick={() => scrollToSection('contact')} className="block w-full text-left text-stone-300 hover:text-stone-100 transition-colors py-2">
+              <button onClick={() => scrollToSection('contact')} className="block w-full text-left text-stone-300 hover:text-stone-100 transition-colors py-2" aria-label="View contact section">
                 Contact
               </button>
-              <button onClick={() => scrollToSection('pricing')} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-colors font-medium mt-2">
+              <button onClick={() => scrollToSection('pricing')} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-colors font-medium mt-2" aria-label="Start your project">
                 Start Project
               </button>
-            </div>
+            </nav>
           )}
         </div>
       </nav>
@@ -761,8 +771,15 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                  aria-label={isSubmitting ? "Submitting message" : "Send message"}
                 >
+                  {isSubmitting && (
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  )}
                   {isSubmitting ? 'Submitting...' : 'Send Message'}
                 </button>
 
