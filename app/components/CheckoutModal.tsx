@@ -124,6 +124,30 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
         upsells: selectedUpsells.join(',')
       });
 
+      // Send to Abandoned Checkouts sheet (for follow-up if they don't complete payment)
+      const leadData = {
+        ...formData,
+        package: packageName,
+        basePrice,
+        selectedUpsells: selectedUpsells.map(id =>
+          upsells.find(u => u.id === id)?.name
+        ),
+        totalPrice: calculateTotal(),
+        timestamp: new Date().toISOString()
+      };
+
+      const leadsURL = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_LEADS_URL;
+      if (leadsURL) {
+        fetch(leadsURL, {
+          method: 'POST',
+          body: JSON.stringify(leadData),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'no-cors'
+        }).catch(err => console.error('Leads tracking error:', err));
+      }
+
       // Create Stripe Checkout Session
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
