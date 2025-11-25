@@ -9,7 +9,7 @@ export default function StructuredData() {
         "url": "https://lead-gen-funnel.vercel.app",
         "telephone": "+61474730896",
         "email": "jamesfinleymcmillan@gmail.com",
-        "priceRange": "$800 - $1800",
+        "priceRange": "$500 - $1800",
         "areaServed": "AU",
         "serviceType": ["Web Development", "Website Design", "Landing Page Design", "Custom Web Applications"]
       },
@@ -34,7 +34,7 @@ export default function StructuredData() {
         "description": "Perfect for small businesses and startups. Professional 3-5 page website delivered in 7 days.",
         "offers": {
           "@type": "Offer",
-          "price": "800",
+          "price": "500",
           "priceCurrency": "AUD",
           "availability": "https://schema.org/InStock",
           "url": "https://lead-gen-funnel.vercel.app/#pricing",
