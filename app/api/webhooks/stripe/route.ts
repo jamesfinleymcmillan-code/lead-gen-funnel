@@ -76,7 +76,6 @@ export async function POST(req: NextRequest) {
             'Content-Type': 'application/json',
           },
         });
-        console.log('Order sent to Google Sheets:', orderData);
       } catch (error) {
         console.error('Error sending to Google Sheets:', error);
         // Don't fail the webhook if Google Sheets fails
