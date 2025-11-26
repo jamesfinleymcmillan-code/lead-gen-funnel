@@ -135,9 +135,9 @@ export default function Home() {
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 text-center">
         <p className="text-sm md:text-base font-semibold">
           {variant === 'variant_a' ? (
-            <>🔥 Limited Time: Only <span className="bg-white/20 px-2 py-1 rounded">3 spots left</span> this month • Book this week and save 10%</>
+            <>Limited Time Offer • Book this week and save <span className="bg-white/20 px-2 py-1 rounded">10%</span> on your project</>
           ) : (
-            <>🔥 Limited Time: Only <span className="bg-white/20 px-2 py-1 rounded">2 spots left</span> this month • Book this week and save 10%</>
+            <>🔥 Special Offer • Get <span className="bg-white/20 px-2 py-1 rounded">10% off</span> when you book this week</>
           )}
         </p>
       </div>
