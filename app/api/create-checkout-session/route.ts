@@ -18,6 +18,7 @@ interface CheckoutRequestBody {
     price: number;
   }>;
   hasDiscount: boolean;
+  hasRecoveryDiscount?: boolean;
   customerEmail: string;
   customerName: string;
   phone: string;
@@ -54,6 +55,7 @@ export async function POST(req: NextRequest) {
       basePrice,
       selectedUpsells,
       hasDiscount,
+      hasRecoveryDiscount,
       customerEmail,
       customerName,
       phone,
@@ -103,11 +105,14 @@ export async function POST(req: NextRequest) {
     // Create discount coupon if applicable
     let discounts: Stripe.Checkout.SessionCreateParams.Discount[] | undefined;
     if (hasDiscount && discountAmount > 0) {
-      // Create a one-time coupon for this session
+      // Create a one-time coupon for this session (15% if recovery, 10% otherwise)
+      const percentOff = hasRecoveryDiscount ? 15 : 10;
+      const couponName = hasRecoveryDiscount ? 'Recovery Offer 15% Off' : 'Limited Time 10% Off';
+
       const coupon = await stripe.coupons.create({
-        percent_off: 10,
+        percent_off: percentOff,
         duration: 'once',
-        name: 'Limited Time 10% Off',
+        name: couponName,
       });
 
       discounts = [
