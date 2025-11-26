@@ -23,6 +23,7 @@ export default function Home() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState({ name: '', price: 0 });
   const [variant, setVariant] = useState<Variant>('variant_a');
+  const [hasRecoveryDiscount, setHasRecoveryDiscount] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,6 +39,18 @@ export default function Home() {
     setVariant(userVariant);
     setUserProperty('variant', userVariant);
     trackEvent('ab_test_variant_view', { variant: userVariant });
+  }, []);
+
+  // Check for recovery discount from cancel page
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('recovery') === 'true') {
+      setHasRecoveryDiscount(true);
+      // Store in sessionStorage so it persists during browsing
+      sessionStorage.setItem('recovery_discount', 'true');
+    } else if (sessionStorage.getItem('recovery_discount') === 'true') {
+      setHasRecoveryDiscount(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -980,6 +993,7 @@ export default function Home() {
         onClose={() => setCheckoutOpen(false)}
         packageName={selectedPackage.name}
         basePrice={selectedPackage.price}
+        hasRecoveryDiscount={hasRecoveryDiscount}
       />
 
       {/* Exit Intent Popup */}

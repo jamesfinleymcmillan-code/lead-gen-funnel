@@ -52,7 +52,7 @@ export default function CancelPage() {
             We noticed you hesitated. As a one-time offer, we'll add an extra 5% discount on top of the current promotion. Book now and save even more.
           </p>
           <Link
-            href="/#pricing"
+            href="/?recovery=true#pricing"
             className="block w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg font-bold text-center transition-all hover:scale-105"
           >
             Claim Extra Discount →

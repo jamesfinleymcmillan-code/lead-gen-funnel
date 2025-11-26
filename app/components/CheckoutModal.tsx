@@ -9,6 +9,7 @@ interface CheckoutModalProps {
   onClose: () => void;
   packageName: string;
   basePrice: number;
+  hasRecoveryDiscount?: boolean;
 }
 
 interface Upsell {
@@ -50,7 +51,7 @@ const upsells: Upsell[] = [
   }
 ];
 
-export default function CheckoutModal({ isOpen, onClose, packageName, basePrice }: CheckoutModalProps) {
+export default function CheckoutModal({ isOpen, onClose, packageName, basePrice, hasRecoveryDiscount = false }: CheckoutModalProps) {
   const [selectedUpsells, setSelectedUpsells] = useState<string[]>([]);
   const [hasDiscount, setHasDiscount] = useState(false);
   const [formData, setFormData] = useState({
@@ -91,7 +92,9 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
 
   const calculateTotal = () => {
     const subtotal = calculateSubtotal();
-    if (hasDiscount) {
+    if (hasDiscount && hasRecoveryDiscount) {
+      return Math.round(subtotal * 0.85); // 15% off (10% + 5% recovery)
+    } else if (hasDiscount) {
       return Math.round(subtotal * 0.9); // 10% off
     }
     return subtotal;
@@ -100,6 +103,9 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
   const getDiscountAmount = () => {
     if (!hasDiscount) return 0;
     const subtotal = calculateSubtotal();
+    if (hasRecoveryDiscount) {
+      return Math.round(subtotal * 0.15); // 15% discount amount
+    }
     return Math.round(subtotal * 0.1); // 10% discount amount
   };
 
@@ -397,12 +403,15 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
             {/* Countdown Timer (if discount active) */}
             {hasDiscount && (
               <div className="bg-white/10 border border-white/20 rounded-lg p-4 mb-4 text-center">
-                <p className="text-emerald-50 text-sm mb-2">🔥 Limited Time Offer!</p>
-                <p className="text-white font-bold text-lg mb-2">10% OFF expires in:</p>
+                <p className="text-emerald-50 text-sm mb-2">{hasRecoveryDiscount ? '💰 EXTRA Savings Applied!' : '🔥 Limited Time Offer!'}</p>
+                <p className="text-white font-bold text-lg mb-2">{hasRecoveryDiscount ? '15% OFF expires in:' : '10% OFF expires in:'}</p>
                 <CountdownTimer
                   className="text-3xl"
                   onExpire={() => setHasDiscount(false)}
                 />
+                {hasRecoveryDiscount && (
+                  <p className="text-emerald-100 text-xs mt-2">You came back! Here's your extra 5% off</p>
+                )}
               </div>
             )}
 
@@ -416,7 +425,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
               )}
               {hasDiscount && (
                 <div className="flex justify-between items-center text-emerald-100 font-semibold">
-                  <span>10% Discount:</span>
+                  <span>{hasRecoveryDiscount ? '15% Discount:' : '10% Discount:'}</span>
                   <span>-${getDiscountAmount()}</span>
                 </div>
               )}
