@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { rateLimit } from '@/app/utils/rateLimit';
 
 // Initialize Stripe lazily to avoid build-time errors
 const getStripe = () => {
@@ -27,6 +28,24 @@ interface CheckoutRequestBody {
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting
+    const identifier = req.headers.get('x-forwarded-for') || 'anonymous';
+    const rateLimitResult = rateLimit(identifier);
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': new Date(rateLimitResult.reset).toISOString(),
+          }
+        }
+      );
+    }
+
     const stripe = getStripe();
     const body: CheckoutRequestBody = await req.json();
 
@@ -125,7 +144,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error: any) {
-    console.error('Error creating checkout session:', error);
+    // Log error for debugging (consider using error tracking service in production)
     return NextResponse.json(
       { error: error.message || 'Failed to create checkout session' },
       { status: 500 }

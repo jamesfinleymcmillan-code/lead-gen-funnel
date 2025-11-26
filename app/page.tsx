@@ -13,6 +13,9 @@ const CheckoutModal = dynamic(() => import('./components/CheckoutModal'), {
 const ExitIntentPopup = dynamic(() => import('./components/ExitIntentPopup'), {
   ssr: false,
 });
+const CookieConsent = dynamic(() => import('./components/CookieConsent'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
@@ -80,7 +83,7 @@ export default function Home() {
       });
       setFormSubmitted(true);
     } catch (error) {
-      console.error('Error submitting form:', error);
+      // Form submitted to Google Sheets via no-cors mode
       setFormSubmitted(true);
     } finally {
       setIsSubmitting(false);
@@ -919,7 +922,10 @@ export default function Home() {
 
           <div className="border-t border-stone-800 pt-8 text-center">
             <p className="text-stone-400 text-sm">
-              © 2025 WebDev Pro. All rights reserved.
+              © 2025 WebDev Pro. All rights reserved. •{' '}
+              <a href="/privacy" className="hover:text-blue-500 transition-colors">
+                Privacy Policy
+              </a>
             </p>
           </div>
         </div>
@@ -935,6 +941,9 @@ export default function Home() {
 
       {/* Exit Intent Popup */}
       <ExitIntentPopup />
+
+      {/* Cookie Consent Banner */}
+      <CookieConsent />
     </div>
   );
 }

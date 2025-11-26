@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     try {
       event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
     } catch (err: any) {
-      console.error('Webhook signature verification failed:', err.message);
+      // Webhook signature verification failed
       return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
     }
 
@@ -77,14 +77,13 @@ export async function POST(req: NextRequest) {
           },
         });
       } catch (error) {
-        console.error('Error sending to Google Sheets:', error);
-        // Don't fail the webhook if Google Sheets fails
+        // Don't fail the webhook if Google Sheets fails - order is still recorded in Stripe
       }
     }
 
     return NextResponse.json({ received: true });
   } catch (error: any) {
-    console.error('Webhook error:', error);
+    // Webhook processing error (consider error tracking service)
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
