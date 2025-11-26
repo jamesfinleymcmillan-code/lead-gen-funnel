@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import CountdownTimer, { isDiscountActive } from './CountdownTimer';
 import { trackEvent } from './GoogleAnalytics';
+import { trackInitiateCheckout } from './FacebookPixel';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -146,6 +147,9 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
         has_discount: hasDiscount,
         upsells: selectedUpsells.join(',')
       });
+
+      // Track checkout initiation in Facebook Pixel
+      trackInitiateCheckout(packageName, calculateTotal());
 
       // Send to Abandoned Checkouts sheet (for follow-up if they don't complete payment)
       const leadData = {

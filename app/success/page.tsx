@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import confetti from 'canvas-confetti';
+import { trackPurchase } from '../components/FacebookPixel';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -11,6 +12,11 @@ function SuccessContent() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
+    // Track purchase conversion
+    if (sessionId) {
+      trackPurchase(1000, sessionId); // Value will be dynamic based on Stripe webhook
+    }
+
     // Trigger confetti celebration!
     const duration = 3 * 1000;
     const animationEnd = Date.now() + duration;
