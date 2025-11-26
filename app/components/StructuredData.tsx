@@ -6,7 +6,7 @@ export default function StructuredData() {
         "@type": "ProfessionalService",
         "name": "WebDev Pro",
         "description": "Professional web development services for businesses. Custom websites, landing pages, and web applications built with Next.js.",
-        "url": "https://lead-gen-funnel.vercel.app",
+        "url": "https://webdevpro.dev",
         "telephone": "+61474730896",
         "email": "jamesfinleymcmillan@gmail.com",
         "priceRange": "$500 - $1800",
@@ -16,8 +16,8 @@ export default function StructuredData() {
       {
         "@type": "Organization",
         "name": "WebDev Pro",
-        "url": "https://lead-gen-funnel.vercel.app",
-        "logo": "https://lead-gen-funnel.vercel.app/icon.svg",
+        "url": "https://webdevpro.dev",
+        "logo": "https://webdevpro.dev/icon.svg",
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+61474730896",
@@ -37,7 +37,7 @@ export default function StructuredData() {
           "price": "500",
           "priceCurrency": "AUD",
           "availability": "https://schema.org/InStock",
-          "url": "https://lead-gen-funnel.vercel.app/#pricing",
+          "url": "https://webdevpro.dev/#pricing",
           "priceValidUntil": "2025-12-31",
           "seller": {
             "@type": "Organization",
@@ -55,7 +55,7 @@ export default function StructuredData() {
           "price": "1000",
           "priceCurrency": "AUD",
           "availability": "https://schema.org/InStock",
-          "url": "https://lead-gen-funnel.vercel.app/#pricing",
+          "url": "https://webdevpro.dev/#pricing",
           "priceValidUntil": "2025-12-31",
           "seller": {
             "@type": "Organization",
@@ -73,7 +73,7 @@ export default function StructuredData() {
           "price": "1800",
           "priceCurrency": "AUD",
           "availability": "https://schema.org/InStock",
-          "url": "https://lead-gen-funnel.vercel.app/#pricing",
+          "url": "https://webdevpro.dev/#pricing",
           "priceValidUntil": "2025-12-31",
           "seller": {
             "@type": "Organization",
