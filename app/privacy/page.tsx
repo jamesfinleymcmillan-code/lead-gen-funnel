@@ -1,3 +1,8 @@
+export const metadata = {
+  title: 'Privacy Policy - WebDev Pro',
+  description: 'Privacy Policy for WebDev Pro - How we collect, use, and protect your personal information',
+};
+
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100 py-20 px-6">

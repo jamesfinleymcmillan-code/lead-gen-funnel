@@ -26,7 +26,8 @@ export default function Home() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    website: '' // honeypot field
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,8 +63,27 @@ export default function Home() {
 
     setIsSubmitting(true);
 
+    // Honeypot spam protection
+    if (formData.website) {
+      // Bot detected - silently reject
+      setFormSubmitted(true);
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Simple client-side rate limiting
+    const lastSubmit = localStorage.getItem('last_contact_submit');
+    if (lastSubmit) {
+      const timeSinceLastSubmit = Date.now() - parseInt(lastSubmit);
+      if (timeSinceLastSubmit < 60000) { // 1 minute
+        alert('Please wait a moment before submitting again.');
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
     // Google Apps Script URL for questions/contact form
-    const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_QUESTIONS_URL || 'https://script.google.com/macros/s/AKfycbx9rIZ2Vbd2iXpGfToPNA-WxrU0IiI8Uodu-hZMceoa3jGdn_gF-KJhMwhtImyEgjMX/exec';
+    const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_QUESTIONS_URL!;
 
     try {
       const response = await fetch(scriptURL, {
@@ -79,9 +99,11 @@ export default function Home() {
       setFormData({
         name: '',
         email: '',
-        message: ''
+        message: '',
+        website: ''
       });
       setFormSubmitted(true);
+      localStorage.setItem('last_contact_submit', Date.now().toString());
     } catch (error) {
       // Form submitted to Google Sheets via no-cors mode
       setFormSubmitted(true);
@@ -101,7 +123,8 @@ export default function Home() {
     setFormData({
       name: '',
       email: '',
-      message: ''
+      message: '',
+      website: ''
     });
     setFormSubmitted(false);
   };
@@ -723,6 +746,18 @@ export default function Home() {
           <div className="bg-stone-900 border border-stone-800 rounded-2xl p-8 md:p-12">
             {!formSubmitted ? (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot field - hidden from users */}
+                <input
+                  type="text"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  style={{ position: 'absolute', left: '-9999px' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
+
                 {/* Name */}
                 <div>
                   <label className="block text-sm font-medium text-stone-300 mb-2">
@@ -924,7 +959,15 @@ export default function Home() {
             <p className="text-stone-400 text-sm">
               © 2025 WebDev Pro. All rights reserved. •{' '}
               <a href="/privacy" className="hover:text-blue-500 transition-colors">
-                Privacy Policy
+                Privacy
+              </a>{' '}
+              •{' '}
+              <a href="/terms" className="hover:text-blue-500 transition-colors">
+                Terms
+              </a>{' '}
+              •{' '}
+              <a href="/refund-policy" className="hover:text-blue-500 transition-colors">
+                Refunds
               </a>
             </p>
           </div>

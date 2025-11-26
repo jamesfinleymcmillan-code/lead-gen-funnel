@@ -59,9 +59,11 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
     phone: '',
     businessName: '',
     projectDetails: '',
-    inspirationWebsite: ''
+    inspirationWebsite: '',
+    website: '' // honeypot field
   });
   const [isProcessing, setIsProcessing] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
   // Check if discount is active on mount and when modal opens
   useEffect(() => {
@@ -103,6 +105,21 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot spam protection
+    if (formData.website) {
+      // Bot detected - silently reject
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
+    setEmailError('');
+
     setIsProcessing(true);
 
     // Prepare upsell data for Stripe
@@ -198,6 +215,10 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear email error when user types
+    if (e.target.name === 'email' && emailError) {
+      setEmailError('');
+    }
   };
 
   return (
@@ -218,6 +239,18 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 md:p-8">
+          {/* Honeypot field - hidden from users */}
+          <input
+            type="text"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            style={{ position: 'absolute', left: '-9999px' }}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
+
           {/* Package Summary */}
           <div className="bg-stone-950 border border-stone-800 rounded-lg p-6 mb-6">
             <div className="flex justify-between items-center mb-4">
@@ -292,9 +325,14 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice 
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
+                  className={`w-full px-4 py-3 bg-stone-950 border rounded-lg text-stone-100 focus:outline-none transition-colors ${
+                    emailError ? 'border-red-500 focus:border-red-500' : 'border-stone-700 focus:border-blue-600'
+                  }`}
                   placeholder="john@example.com"
                 />
+                {emailError && (
+                  <p className="text-red-500 text-sm mt-1">{emailError}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-stone-300 mb-2">
