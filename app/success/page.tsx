@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import confetti from 'canvas-confetti';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -10,8 +11,37 @@ function SuccessContent() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    // You could fetch session details from Stripe here if needed
-    // For now, we'll just show a success message
+    // Trigger confetti celebration!
+    const duration = 3 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min: number, max: number) {
+      return Math.random() * (max - min) + min;
+    }
+
+    const interval: any = setInterval(function() {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      const particleCount = 50 * (timeLeft / duration);
+
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+      });
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+      });
+    }, 250);
+
+    return () => clearInterval(interval);
   }, [sessionId]);
 
   return (
@@ -37,11 +67,14 @@ function SuccessContent() {
         </div>
 
         {/* Success Message */}
-        <h1 className="text-4xl md:text-5xl font-bold text-stone-100 mb-4">
-          Payment Successful!
+        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4 animate-fade-in">
+          Welcome Aboard! 🎉
         </h1>
-        <p className="text-xl text-stone-300 mb-8">
-          Thank you for choosing our web development services.
+        <p className="text-2xl text-stone-100 font-semibold mb-2">
+          Your payment was successful
+        </p>
+        <p className="text-lg text-stone-400 mb-8">
+          We're excited to build something amazing for your business
         </p>
 
         {/* Order Confirmation */}
