@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebDev Pro - Perfect Square Ad (1:1)</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #f5f5f4;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #a8a29e;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        canvas {
+            border: 3px solid #2563eb;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            max-width: 100%;
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.3);
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.5);
+        }
+
+        .info {
+            color: #22c55e;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Perfect Square Ad - 1:1 Format</h1>
+    <p class="subtitle">1200x1200px - Optimized for Facebook & Instagram Feed</p>
+
+    <canvas id="square" width="1200" height="1200"></canvas>
+
+    <button onclick="downloadImage()">Download Square Ad (1:1)</button>
+    <p class="info">✓ Perfect for Feed | ✓ All prices correct | ✓ Professional design</p>
+
+    <script>
+        const canvas = document.getElementById('square');
+        const ctx = canvas.getContext('2d');
+
+        // Helper: Draw rounded rectangle
+        CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+            this.beginPath();
+            this.moveTo(x + radius, y);
+            this.lineTo(x + width - radius, y);
+            this.quadraticCurveTo(x + width, y, x + width, y + radius);
+            this.lineTo(x + width, y + height - radius);
+            this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            this.lineTo(x + radius, y + height);
+            this.quadraticCurveTo(x, y + height, x, y + height - radius);
+            this.lineTo(x, y + radius);
+            this.quadraticCurveTo(x, y, x + radius, y);
+            this.closePath();
+        };
+
+        // Background gradient
+        const bgGradient = ctx.createLinearGradient(0, 0, 0, 1200);
+        bgGradient.addColorStop(0, '#0a0f1e');
+        bgGradient.addColorStop(0.5, '#1e293b');
+        bgGradient.addColorStop(1, '#0f172a');
+        ctx.fillStyle = bgGradient;
+        ctx.fillRect(0, 0, 1200, 1200);
+
+        // Subtle accent circles for depth
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.06)';
+        ctx.beginPath();
+        ctx.arc(200, 200, 350, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.04)';
+        ctx.beginPath();
+        ctx.arc(1000, 1000, 400, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Top badge - 10% OFF
+        const badgeGradient = ctx.createLinearGradient(0, 55, 0, 150);
+        badgeGradient.addColorStop(0, '#dc2626');
+        badgeGradient.addColorStop(1, '#991b1b');
+        ctx.fillStyle = badgeGradient;
+        ctx.shadowColor = 'rgba(220, 38, 38, 0.6)';
+        ctx.shadowBlur = 30;
+        ctx.beginPath();
+        ctx.roundRect(230, 55, 740, 95, 48);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 48px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🔥  SPECIAL OFFER: 10% OFF  🔥', 600, 102);
+
+        // Main headline
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 78px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('Professional Website', 600, 230);
+
+        // Blue gradient headline
+        const textGradient = ctx.createLinearGradient(0, 320, 0, 470);
+        textGradient.addColorStop(0, '#60a5fa');
+        textGradient.addColorStop(1, '#2563eb');
+        ctx.fillStyle = textGradient;
+        ctx.font = 'bold 86px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('That Brings You', 600, 340);
+        ctx.fillText('CUSTOMERS', 600, 455);
+
+        // Subheadline
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '38px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('Fast Delivery  •  Fixed Pricing  •  No Calls Needed', 600, 555);
+
+        // Pricing boxes - 3 SIDE BY SIDE
+        const packages = [
+            {
+                name: 'BASIC',
+                oldPrice: '$500',
+                newPrice: '$450',
+                features: ['5 Pages', '7-Day Delivery', 'SEO Optimized'],
+                highlight: false
+            },
+            {
+                name: 'PRO',
+                oldPrice: '$1,000',
+                newPrice: '$900',
+                features: ['Form Integration', '5-Day Delivery', 'Custom Design'],
+                highlight: true
+            },
+            {
+                name: 'PREMIUM',
+                oldPrice: '$1,800',
+                newPrice: '$1,620',
+                features: ['Up to 10 Pages', '3-Day Priority', 'Advanced Features'],
+                highlight: false
+            }
+        ];
+
+        const boxY = 650;
+        const boxWidth = 310;
+        const boxHeight = 360;
+        const boxSpacing = 60;
+        const totalWidth = (boxWidth * 3) + (boxSpacing * 2);
+        const startX = (1200 - totalWidth) / 2;
+
+        packages.forEach((pkg, index) => {
+            const boxX = startX + (boxWidth + boxSpacing) * index;
+
+            // Box shadow and background
+            if (pkg.highlight) {
+                const gradient = ctx.createLinearGradient(boxX, boxY, boxX, boxY + boxHeight);
+                gradient.addColorStop(0, '#3b82f6');
+                gradient.addColorStop(1, '#1d4ed8');
+                ctx.fillStyle = gradient;
+                ctx.shadowColor = 'rgba(59, 130, 246, 0.8)';
+                ctx.shadowBlur = 35;
+            } else {
+                ctx.fillStyle = 'rgba(30, 41, 59, 0.85)';
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+                ctx.shadowBlur = 20;
+            }
+
+            ctx.beginPath();
+            ctx.roundRect(boxX, boxY, boxWidth, boxHeight, 20);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // "MOST POPULAR" ribbon for Pro
+            if (pkg.highlight) {
+                ctx.fillStyle = '#fbbf24';
+                ctx.beginPath();
+                ctx.roundRect(boxX + 50, boxY - 18, 210, 36, 18);
+                ctx.fill();
+
+                ctx.fillStyle = '#1e293b';
+                ctx.font = 'bold 18px -apple-system, system-ui, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('⭐ MOST POPULAR', boxX + 155, boxY + 2);
+            }
+
+            const centerX = boxX + boxWidth / 2;
+
+            // Package name
+            ctx.fillStyle = pkg.highlight ? '#ffffff' : '#94a3b8';
+            ctx.font = 'bold 30px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(pkg.name, centerX, boxY + 55);
+
+            // Old price with perfect strikethrough
+            const oldPriceColor = pkg.highlight ? '#cbd5e1' : '#64748b';
+            ctx.fillStyle = oldPriceColor;
+            ctx.font = '26px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText(pkg.oldPrice, centerX, boxY + 105);
+
+            // Strikethrough line - PROPERLY THROUGH THE TEXT
+            const oldPriceWidth = ctx.measureText(pkg.oldPrice).width;
+            ctx.strokeStyle = oldPriceColor;
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(centerX - oldPriceWidth / 2 - 12, boxY + 102);
+            ctx.lineTo(centerX + oldPriceWidth / 2 + 12, boxY + 102);
+            ctx.stroke();
+
+            // New price (large and bold)
+            ctx.fillStyle = pkg.highlight ? '#ffffff' : '#60a5fa';
+            ctx.font = 'bold 66px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText(pkg.newPrice, centerX, boxY + 180);
+
+            // Divider line
+            ctx.strokeStyle = pkg.highlight ? 'rgba(255, 255, 255, 0.2)' : 'rgba(148, 163, 184, 0.2)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(boxX + 35, boxY + 230);
+            ctx.lineTo(boxX + boxWidth - 35, boxY + 230);
+            ctx.stroke();
+
+            // Features with checkmarks
+            ctx.fillStyle = pkg.highlight ? '#e0f2fe' : '#cbd5e1';
+            ctx.font = '22px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            pkg.features.forEach((feature, idx) => {
+                ctx.fillText('✓  ' + feature, centerX, boxY + 270 + (idx * 35));
+            });
+        });
+
+        // Bottom CTA section
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 46px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Book This Week & Save 10%', 600, 1080);
+
+        // Website URL
+        ctx.fillStyle = '#60a5fa';
+        ctx.font = 'bold 40px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('webdevpro.dev', 600, 1145);
+
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'webdevpro-square-ad-1-1.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>

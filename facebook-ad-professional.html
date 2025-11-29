@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebDev Pro - Professional Facebook Ads</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        h1 {
+            color: #f5f5f4;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #a8a29e;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .canvas-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #0f172a;
+            border-radius: 12px;
+        }
+
+        .canvas-container h2 {
+            color: #3b82f6;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            border: 2px solid #2563eb;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            max-width: 100%;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .info {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .note {
+            color: #22c55e;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Professional Facebook Ad Images</h1>
+    <p class="subtitle">Fixed prices: $500→$450 | $1,000→$900 | $1,800→$1,620</p>
+
+    <!-- Square Format -->
+    <div class="canvas-container">
+        <h2>Square (1:1) - 1200x1200px</h2>
+        <p class="info">For: Facebook Feed, Instagram Feed</p>
+        <canvas id="square" width="1200" height="1200"></canvas>
+        <button onclick="downloadImage('square', 'webdevpro-ad-square.png')">Download Square</button>
+        <p class="note">✓ Professional design with proper strikethroughs</p>
+    </div>
+
+    <!-- Vertical Format -->
+    <div class="canvas-container">
+        <h2>Vertical (9:16) - 1080x1920px</h2>
+        <p class="info">For: Instagram Stories, Reels, Facebook Stories</p>
+        <canvas id="vertical" width="1080" height="1920"></canvas>
+        <button onclick="downloadImage('vertical', 'webdevpro-ad-vertical.png')">Download Vertical</button>
+        <p class="note">✓ Professional design with proper strikethroughs</p>
+    </div>
+
+    <!-- Horizontal Format -->
+    <div class="canvas-container">
+        <h2>Horizontal (1.91:1) - 1200x628px</h2>
+        <p class="info">For: Facebook Right Column, Desktop Ads</p>
+        <canvas id="horizontal" width="1200" height="628"></canvas>
+        <button onclick="downloadImage('horizontal', 'webdevpro-ad-horizontal.png')">Download Horizontal</button>
+        <p class="note">✓ Professional design with proper strikethroughs</p>
+    </div>
+
+    <script>
+        // Helper: Draw background
+        function drawBackground(ctx, width, height) {
+            const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
+            bgGradient.addColorStop(0, '#0a0f1e');
+            bgGradient.addColorStop(1, '#1e293b');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Subtle grid pattern
+            ctx.strokeStyle = 'rgba(59, 130, 246, 0.03)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < width; i += 40) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, height);
+                ctx.stroke();
+            }
+            for (let i = 0; i < height; i += 40) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(width, i);
+                ctx.stroke();
+            }
+        }
+
+        // Helper: Draw rounded rectangle
+        CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+            this.beginPath();
+            this.moveTo(x + radius, y);
+            this.lineTo(x + width - radius, y);
+            this.quadraticCurveTo(x + width, y, x + width, y + radius);
+            this.lineTo(x + width, y + height - radius);
+            this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            this.lineTo(x + radius, y + height);
+            this.quadraticCurveTo(x, y + height, x, y + height - radius);
+            this.lineTo(x, y + radius);
+            this.quadraticCurveTo(x, y, x + radius, y);
+            this.closePath();
+        };
+
+        // Helper: Draw text with proper strikethrough
+        function drawStrikethrough(ctx, text, x, y, color) {
+            ctx.fillStyle = color;
+            ctx.fillText(text, x, y);
+
+            const metrics = ctx.measureText(text);
+            const textWidth = metrics.width;
+
+            // Draw line THROUGH the middle of the text
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(x - textWidth / 2 - 10, y - 3); // Slightly above center for better visual
+            ctx.lineTo(x + textWidth / 2 + 10, y - 3);
+            ctx.stroke();
+        }
+
+        // SQUARE FORMAT (1200x1200)
+        function drawSquare() {
+            const canvas = document.getElementById('square');
+            const ctx = canvas.getContext('2d');
+
+            drawBackground(ctx, 1200, 1200);
+
+            // Top badge - more professional
+            const badgeGradient = ctx.createLinearGradient(0, 60, 0, 145);
+            badgeGradient.addColorStop(0, '#dc2626');
+            badgeGradient.addColorStop(1, '#b91c1c');
+            ctx.fillStyle = badgeGradient;
+            ctx.shadowColor = 'rgba(220, 38, 38, 0.5)';
+            ctx.shadowBlur = 20;
+            ctx.beginPath();
+            ctx.roundRect(250, 60, 700, 85, 42);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 46px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🔥  SPECIAL OFFER: 10% OFF  🔥', 600, 102);
+
+            // Main headline
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = 'bold 76px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('Professional Website', 600, 240);
+
+            // Blue gradient text
+            const textGradient = ctx.createLinearGradient(0, 330, 0, 470);
+            textGradient.addColorStop(0, '#60a5fa');
+            textGradient.addColorStop(1, '#2563eb');
+            ctx.fillStyle = textGradient;
+            ctx.font = 'bold 84px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('That Brings You', 600, 350);
+            ctx.fillText('CUSTOMERS', 600, 460);
+
+            // Subheadline
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = '37px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('Fast Delivery  •  Fixed Pricing  •  No Calls Needed', 600, 560);
+
+            // Pricing boxes - CORRECTED PRICES
+            const boxY = 660;
+            const boxWidth = 305;
+            const boxHeight = 340;
+            const spacing = 65;
+            const totalWidth = (boxWidth * 3) + (spacing * 2);
+            const startX = (1200 - totalWidth) / 2;
+
+            const packages = [
+                {
+                    name: 'BASIC',
+                    oldPrice: '$500',
+                    newPrice: '$450',
+                    features: ['5 Pages', '7-Day Delivery', 'SEO Optimized']
+                },
+                {
+                    name: 'PRO',
+                    oldPrice: '$1,000',
+                    newPrice: '$900',
+                    features: ['Form Integration', '5-Day Delivery', 'Custom Design'],
+                    highlight: true
+                },
+                {
+                    name: 'PREMIUM',
+                    oldPrice: '$1,800',
+                    newPrice: '$1,620',
+                    features: ['Up to 10 Pages', '3-Day Priority', 'Advanced Features']
+                }
+            ];
+
+            packages.forEach((pkg, i) => {
+                const x = startX + (boxWidth + spacing) * i;
+
+                // Box background
+                if (pkg.highlight) {
+                    const gradient = ctx.createLinearGradient(x, boxY, x, boxY + boxHeight);
+                    gradient.addColorStop(0, '#3b82f6');
+                    gradient.addColorStop(1, '#1d4ed8');
+                    ctx.fillStyle = gradient;
+                    ctx.shadowColor = 'rgba(59, 130, 246, 0.7)';
+                    ctx.shadowBlur = 30;
+                } else {
+                    ctx.fillStyle = 'rgba(30, 41, 59, 0.9)';
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                    ctx.shadowBlur = 15;
+                }
+
+                ctx.beginPath();
+                ctx.roundRect(x, boxY, boxWidth, boxHeight, 18);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                const centerX = x + boxWidth / 2;
+
+                // "MOST POPULAR" badge for Pro
+                if (pkg.highlight) {
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.beginPath();
+                    ctx.roundRect(x + 40, boxY - 18, boxWidth - 80, 36, 18);
+                    ctx.fill();
+
+                    ctx.fillStyle = '#1e293b';
+                    ctx.font = 'bold 18px -apple-system, system-ui, sans-serif';
+                    ctx.fillText('MOST POPULAR', centerX, boxY + 2);
+                }
+
+                // Package name
+                ctx.fillStyle = pkg.highlight ? '#ffffff' : '#94a3b8';
+                ctx.font = 'bold 28px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(pkg.name, centerX, boxY + 55);
+
+                // Old price with PROPER strikethrough
+                const oldPriceColor = pkg.highlight ? '#cbd5e1' : '#64748b';
+                ctx.font = '24px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                drawStrikethrough(ctx, pkg.oldPrice, centerX, boxY + 105, oldPriceColor);
+
+                // New price (large and bold)
+                ctx.fillStyle = pkg.highlight ? '#ffffff' : '#60a5fa';
+                ctx.font = 'bold 62px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                ctx.fillText(pkg.newPrice, centerX, boxY + 180);
+
+                // Divider line
+                ctx.strokeStyle = pkg.highlight ? 'rgba(255,255,255,0.2)' : 'rgba(148,163,184,0.2)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(x + 30, boxY + 225);
+                ctx.lineTo(x + boxWidth - 30, boxY + 225);
+                ctx.stroke();
+
+                // Features with checkmarks
+                ctx.fillStyle = pkg.highlight ? '#e0f2fe' : '#cbd5e1';
+                ctx.font = '21px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                pkg.features.forEach((feature, idx) => {
+                    ctx.fillText('✓  ' + feature, centerX, boxY + 265 + (idx * 32));
+                });
+            });
+
+            // Bottom CTA
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = 'bold 44px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('Book This Week & Save 10%', 600, 1070);
+
+            ctx.fillStyle = '#60a5fa';
+            ctx.font = 'bold 38px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('webdevpro.dev', 600, 1135);
+        }
+
+        // VERTICAL FORMAT (1080x1920)
+        function drawVertical() {
+            const canvas = document.getElementById('vertical');
+            const ctx = canvas.getContext('2d');
+
+            drawBackground(ctx, 1080, 1920);
+
+            // Top badge
+            const badgeGradient = ctx.createLinearGradient(0, 80, 0, 220);
+            badgeGradient.addColorStop(0, '#dc2626');
+            badgeGradient.addColorStop(1, '#b91c1c');
+            ctx.fillStyle = badgeGradient;
+            ctx.shadowColor = 'rgba(220, 38, 38, 0.5)';
+            ctx.shadowBlur = 25;
+            ctx.beginPath();
+            ctx.roundRect(120, 80, 840, 140, 70);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 52px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('🔥  SPECIAL OFFER  🔥', 540, 125);
+            ctx.fillText('10% OFF', 540, 185);
+
+            // Main headline
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = 'bold 74px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('Professional', 540, 340);
+            ctx.fillText('Website', 540, 430);
+
+            const textGradient = ctx.createLinearGradient(0, 500, 0, 720);
+            textGradient.addColorStop(0, '#60a5fa');
+            textGradient.addColorStop(1, '#2563eb');
+            ctx.fillStyle = textGradient;
+            ctx.font = 'bold 80px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('That Brings', 540, 540);
+            ctx.fillText('You', 540, 635);
+            ctx.fillText('CUSTOMERS', 540, 730);
+
+            // Features
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = '36px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('✓  Fast Delivery', 540, 840);
+            ctx.fillText('✓  Fixed Pricing', 540, 895);
+            ctx.fillText('✓  No Calls Needed', 540, 950);
+
+            // Pricing boxes (stacked)
+            const packages = [
+                { name: 'BASIC', oldPrice: '$500', newPrice: '$450', desc: '5 Pages  •  7-Day Delivery' },
+                { name: 'PRO', oldPrice: '$1,000', newPrice: '$900', desc: 'Form Integration  •  5 Days', highlight: true },
+                { name: 'PREMIUM', oldPrice: '$1,800', newPrice: '$1,620', desc: '10 Pages  •  3-Day Priority' }
+            ];
+
+            let yPos = 1030;
+            const boxWidth = 940;
+            const boxHeight = 210;
+            const boxX = (1080 - boxWidth) / 2;
+
+            packages.forEach(pkg => {
+                if (pkg.highlight) {
+                    const gradient = ctx.createLinearGradient(boxX, yPos, boxX, yPos + boxHeight);
+                    gradient.addColorStop(0, '#3b82f6');
+                    gradient.addColorStop(1, '#1d4ed8');
+                    ctx.fillStyle = gradient;
+                    ctx.shadowColor = 'rgba(59, 130, 246, 0.7)';
+                    ctx.shadowBlur = 30;
+                } else {
+                    ctx.fillStyle = 'rgba(30, 41, 59, 0.9)';
+                    ctx.shadowBlur = 0;
+                }
+
+                ctx.beginPath();
+                ctx.roundRect(boxX, yPos, boxWidth, boxHeight, 22);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                // Package name (left)
+                ctx.fillStyle = pkg.highlight ? '#ffffff' : '#94a3b8';
+                ctx.font = 'bold 34px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(pkg.name, boxX + 45, yPos + 60);
+
+                // Old price with strikethrough (left, below name)
+                const oldPriceColor = pkg.highlight ? '#cbd5e1' : '#64748b';
+                ctx.font = '28px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                ctx.fillStyle = oldPriceColor;
+                const oldPriceX = boxX + 45;
+                ctx.fillText(pkg.oldPrice, oldPriceX, yPos + 110);
+
+                // Strikethrough
+                const oldPriceWidth = ctx.measureText(pkg.oldPrice).width;
+                ctx.strokeStyle = oldPriceColor;
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                ctx.moveTo(oldPriceX, yPos + 107);
+                ctx.lineTo(oldPriceX + oldPriceWidth, yPos + 107);
+                ctx.stroke();
+
+                // New price (right side)
+                ctx.fillStyle = pkg.highlight ? '#ffffff' : '#60a5fa';
+                ctx.font = 'bold 60px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText(pkg.newPrice, boxX + boxWidth - 45, yPos + 75);
+
+                // Description
+                ctx.fillStyle = pkg.highlight ? '#e0f2fe' : '#cbd5e1';
+                ctx.font = '26px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                ctx.fillText(pkg.desc, boxX + boxWidth - 45, yPos + 125);
+
+                // Features (bottom)
+                ctx.fillStyle = pkg.highlight ? '#bae6fd' : '#94a3b8';
+                ctx.font = '24px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(pkg.desc, boxX + 45, yPos + 165);
+
+                yPos += boxHeight + 40;
+            });
+
+            // Bottom CTA
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = 'bold 48px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Book This Week', 540, 1770);
+            ctx.fillText('& Save 10%', 540, 1835);
+
+            ctx.fillStyle = '#60a5fa';
+            ctx.font = 'bold 42px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('webdevpro.dev', 540, 1895);
+        }
+
+        // HORIZONTAL FORMAT (1200x628)
+        function drawHorizontal() {
+            const canvas = document.getElementById('horizontal');
+            const ctx = canvas.getContext('2d');
+
+            drawBackground(ctx, 1200, 628);
+
+            // Left content
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = 'bold 52px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('Professional', 45, 95);
+            ctx.fillText('Website', 45, 160);
+
+            const textGradient = ctx.createLinearGradient(0, 210, 0, 290);
+            textGradient.addColorStop(0, '#60a5fa');
+            textGradient.addColorStop(1, '#2563eb');
+            ctx.fillStyle = textGradient;
+            ctx.font = 'bold 58px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('That Brings', 45, 230);
+            ctx.fillText('CUSTOMERS', 45, 300);
+
+            // Badge
+            const badgeGradient = ctx.createLinearGradient(0, 350, 0, 420);
+            badgeGradient.addColorStop(0, '#dc2626');
+            badgeGradient.addColorStop(1, '#b91c1c');
+            ctx.fillStyle = badgeGradient;
+            ctx.shadowColor = 'rgba(220, 38, 38, 0.5)';
+            ctx.shadowBlur = 15;
+            ctx.beginPath();
+            ctx.roundRect(45, 350, 430, 70, 35);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 34px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('🔥  10% OFF This Week', 260, 390);
+
+            // Features
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = '26px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('✓  Fast Delivery (3-7 days)', 45, 470);
+            ctx.fillText('✓  Fixed Pricing from $450', 45, 512);
+            ctx.fillText('✓  No Calls Needed', 45, 554);
+
+            // Website
+            ctx.fillStyle = '#60a5fa';
+            ctx.font = 'bold 30px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText('webdevpro.dev', 45, 600);
+
+            // Right pricing boxes
+            const packages = [
+                { name: 'BASIC', oldPrice: '$500', newPrice: '$450' },
+                { name: 'PRO', oldPrice: '$1K', newPrice: '$900', highlight: true },
+                { name: 'PREMIUM', oldPrice: '$1.8K', newPrice: '$1.6K' }
+            ];
+
+            let xPos = 560;
+            const boxWidth = 200;
+            const boxHeight = 570;
+
+            packages.forEach(pkg => {
+                if (pkg.highlight) {
+                    const gradient = ctx.createLinearGradient(xPos, 30, xPos, 30 + boxHeight);
+                    gradient.addColorStop(0, '#3b82f6');
+                    gradient.addColorStop(1, '#1d4ed8');
+                    ctx.fillStyle = gradient;
+                    ctx.shadowColor = 'rgba(59, 130, 246, 0.7)';
+                    ctx.shadowBlur = 25;
+                } else {
+                    ctx.fillStyle = 'rgba(30, 41, 59, 0.9)';
+                    ctx.shadowBlur = 0;
+                }
+
+                ctx.beginPath();
+                ctx.roundRect(xPos, 30, boxWidth, boxHeight, 18);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                const centerX = xPos + boxWidth / 2;
+
+                // Package name
+                ctx.fillStyle = pkg.highlight ? '#ffffff' : '#94a3b8';
+                ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(pkg.name, centerX, 85);
+
+                // Old price with strikethrough
+                const oldPriceColor = pkg.highlight ? '#cbd5e1' : '#64748b';
+                ctx.font = '22px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                drawStrikethrough(ctx, pkg.oldPrice, centerX, 130, oldPriceColor);
+
+                // New price
+                ctx.fillStyle = pkg.highlight ? '#ffffff' : '#60a5fa';
+                ctx.font = 'bold 42px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                ctx.fillText(pkg.newPrice, centerX, 195);
+
+                xPos += boxWidth + 20;
+            });
+        }
+
+        // Generate all formats
+        drawSquare();
+        drawVertical();
+        drawHorizontal();
+
+        function downloadImage(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>

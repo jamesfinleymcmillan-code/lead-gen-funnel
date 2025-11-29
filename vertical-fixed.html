@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Ad - Fixed</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        canvas {
+            border: 3px solid #2563eb;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            max-width: 100%;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="vertical" width="1080" height="1920"></canvas>
+    <button onclick="downloadImage()">Download Vertical Ad (9:16)</button>
+
+    <script>
+        const canvas = document.getElementById('vertical');
+        const ctx = canvas.getContext('2d');
+
+        CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+            this.beginPath();
+            this.moveTo(x + radius, y);
+            this.lineTo(x + width - radius, y);
+            this.quadraticCurveTo(x + width, y, x + width, y + radius);
+            this.lineTo(x + width, y + height - radius);
+            this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            this.lineTo(x + radius, y + height);
+            this.quadraticCurveTo(x, y + height, x, y + height - radius);
+            this.lineTo(x, y + radius);
+            this.quadraticCurveTo(x, y, x + radius, y);
+            this.closePath();
+        };
+
+        const bgGradient = ctx.createLinearGradient(0, 0, 0, 1920);
+        bgGradient.addColorStop(0, '#0a0f1e');
+        bgGradient.addColorStop(0.5, '#1e293b');
+        bgGradient.addColorStop(1, '#0f172a');
+        ctx.fillStyle = bgGradient;
+        ctx.fillRect(0, 0, 1080, 1920);
+
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.08)';
+        ctx.beginPath();
+        ctx.arc(200, 300, 400, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.05)';
+        ctx.beginPath();
+        ctx.arc(880, 1500, 350, 0, Math.PI * 2);
+        ctx.fill();
+
+        const badgeGradient = ctx.createLinearGradient(0, 70, 0, 230);
+        badgeGradient.addColorStop(0, '#dc2626');
+        badgeGradient.addColorStop(1, '#991b1b');
+        ctx.fillStyle = badgeGradient;
+        ctx.shadowColor = 'rgba(220, 38, 38, 0.6)';
+        ctx.shadowBlur = 30;
+        ctx.beginPath();
+        ctx.roundRect(100, 70, 880, 160, 80);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 56px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🔥  SPECIAL OFFER  🔥', 540, 115);
+        ctx.font = 'bold 68px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('10% OFF', 540, 190);
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 80px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('Professional', 540, 340);
+        ctx.fillText('Website', 540, 440);
+
+        const textGradient = ctx.createLinearGradient(0, 520, 0, 740);
+        textGradient.addColorStop(0, '#60a5fa');
+        textGradient.addColorStop(1, '#2563eb');
+        ctx.fillStyle = textGradient;
+        ctx.font = 'bold 86px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('That Brings', 540, 560);
+        ctx.fillText('You', 540, 660);
+        ctx.font = 'bold 92px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('CUSTOMERS', 540, 760);
+
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '38px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('✓  Fast Delivery (3-7 Days)', 540, 870);
+        ctx.fillText('✓  Fixed Pricing', 540, 930);
+        ctx.fillText('✓  No Calls Needed', 540, 990);
+
+        const packages = [
+            {
+                name: 'BASIC PACKAGE',
+                oldPrice: '$500',
+                newPrice: '$450',
+                description: '5 Pages  •  7-Day Delivery  •  SEO Ready',
+                highlight: false
+            },
+            {
+                name: 'PRO PACKAGE',
+                oldPrice: '$1,000',
+                newPrice: '$900',
+                description: 'Form Integration  •  5-Day Delivery  •  Custom Design',
+                highlight: true
+            },
+            {
+                name: 'PREMIUM PACKAGE',
+                oldPrice: '$1,800',
+                newPrice: '$1,620',
+                description: '10 Pages  •  3-Day Priority  •  Advanced Features',
+                highlight: false
+            }
+        ];
+
+        let yPosition = 1080;
+        const boxWidth = 960;
+        const boxHeight = 190;
+        const boxX = (1080 - boxWidth) / 2;
+        const boxSpacing = 20;
+
+        packages.forEach((pkg) => {
+            if (pkg.highlight) {
+                const gradient = ctx.createLinearGradient(boxX, yPosition, boxX, yPosition + boxHeight);
+                gradient.addColorStop(0, '#3b82f6');
+                gradient.addColorStop(1, '#1d4ed8');
+                ctx.fillStyle = gradient;
+                ctx.shadowColor = 'rgba(59, 130, 246, 0.8)';
+                ctx.shadowBlur = 35;
+            } else {
+                ctx.fillStyle = 'rgba(30, 41, 59, 0.85)';
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+                ctx.shadowBlur = 20;
+            }
+
+            ctx.beginPath();
+            ctx.roundRect(boxX, yPosition, boxWidth, boxHeight, 24);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            if (pkg.highlight) {
+                ctx.fillStyle = '#fbbf24';
+                ctx.beginPath();
+                ctx.roundRect(boxX + 60, yPosition - 20, 260, 40, 20);
+                ctx.fill();
+
+                ctx.fillStyle = '#1e293b';
+                ctx.font = 'bold 22px -apple-system, system-ui, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('⭐ MOST POPULAR', boxX + 190, yPosition + 2);
+            }
+
+            const leftMargin = boxX + 50;
+            const rightMargin = boxX + boxWidth - 50;
+
+            ctx.fillStyle = pkg.highlight ? '#ffffff' : '#94a3b8';
+            ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(pkg.name, leftMargin, yPosition + 50);
+
+            const oldPriceColor = pkg.highlight ? '#cbd5e1' : '#64748b';
+            ctx.fillStyle = oldPriceColor;
+            ctx.font = '26px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.fillText(pkg.oldPrice, leftMargin, yPosition + 95);
+
+            const oldPriceWidth = ctx.measureText(pkg.oldPrice).width;
+            ctx.strokeStyle = oldPriceColor;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(leftMargin, yPosition + 92);
+            ctx.lineTo(leftMargin + oldPriceWidth, yPosition + 92);
+            ctx.stroke();
+
+            ctx.fillStyle = pkg.highlight ? '#ffffff' : '#60a5fa';
+            ctx.font = 'bold 62px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'right';
+            ctx.fillText(pkg.newPrice, rightMargin, yPosition + 70);
+
+            ctx.fillStyle = pkg.highlight ? '#e0f2fe' : '#cbd5e1';
+            ctx.font = '24px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(pkg.description, boxX + boxWidth / 2, yPosition + 145);
+
+            yPosition += boxHeight + boxSpacing;
+        });
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 50px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Book This Week', 540, 1780);
+        ctx.fillText('& Save 10%', 540, 1845);
+
+        ctx.fillStyle = '#60a5fa';
+        ctx.font = 'bold 42px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+        ctx.fillText('webdevpro.dev', 540, 1900);
+
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'webdevpro-vertical-ad-9-16.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>

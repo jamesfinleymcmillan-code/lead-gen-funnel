@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebDev Pro - Facebook Ad Image</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #f5f5f4;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        canvas {
+            border: 2px solid #2563eb;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            max-width: 100%;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .info {
+            color: #a8a29e;
+            margin-top: 20px;
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Facebook Ad Image Generator</h1>
+    <canvas id="canvas" width="1200" height="1200"></canvas>
+    <div class="button-group">
+        <button onclick="downloadImage()">Download Ad Image (1200x1200)</button>
+    </div>
+    <p class="info">
+        This is a 1200x1200px square image optimized for Facebook ads.
+        Right-click to save, or use the download button.
+        Square format works perfectly for all Facebook placements.
+    </p>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Background - Dark gradient
+        const bgGradient = ctx.createLinearGradient(0, 0, 0, 1200);
+        bgGradient.addColorStop(0, '#0f172a');
+        bgGradient.addColorStop(1, '#1e293b');
+        ctx.fillStyle = bgGradient;
+        ctx.fillRect(0, 0, 1200, 1200);
+
+        // Add subtle diagonal lines pattern
+        ctx.strokeStyle = 'rgba(59, 130, 246, 0.05)';
+        ctx.lineWidth = 2;
+        for (let i = -1200; i < 1200; i += 60) {
+            ctx.beginPath();
+            ctx.moveTo(i, 0);
+            ctx.lineTo(i + 1200, 1200);
+            ctx.stroke();
+        }
+
+        // Top badge - Special Offer
+        const badgeGradient = ctx.createLinearGradient(0, 80, 0, 160);
+        badgeGradient.addColorStop(0, '#ef4444');
+        badgeGradient.addColorStop(1, '#dc2626');
+        ctx.fillStyle = badgeGradient;
+        ctx.beginPath();
+        ctx.roundRect(300, 80, 600, 80, 40);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 42px -apple-system, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🔥 LIMITED TIME: 10% OFF', 600, 120);
+
+        // Main headline - line 1
+        ctx.fillStyle = '#f1f5f9';
+        ctx.font = 'bold 76px -apple-system, system-ui, sans-serif';
+        ctx.fillText('Professional Website', 600, 280);
+
+        // Main headline - line 2 (with blue gradient)
+        const textGradient = ctx.createLinearGradient(0, 350, 0, 430);
+        textGradient.addColorStop(0, '#3b82f6');
+        textGradient.addColorStop(1, '#2563eb');
+        ctx.fillStyle = textGradient;
+        ctx.font = 'bold 82px -apple-system, system-ui, sans-serif';
+        ctx.fillText('That Brings You', 600, 390);
+        ctx.fillText('CUSTOMERS', 600, 500);
+
+        // Subheadline
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '38px -apple-system, system-ui, sans-serif';
+        ctx.fillText('Fast Delivery • Fixed Pricing • No Calls Needed', 600, 600);
+
+        // Pricing boxes container
+        const boxY = 700;
+        const boxWidth = 320;
+        const boxHeight = 280;
+        const gap = 60;
+        const startX = 600 - (boxWidth * 1.5 + gap);
+
+        // Package data
+        const packages = [
+            { name: 'BASIC', price: '$500', was: '$555', features: ['5 Pages', '7 Days', 'SEO Ready'] },
+            { name: 'PRO', price: '$900', was: '$1000', features: ['Form Integration', '5 Days', 'Custom Design'], highlight: true },
+            { name: 'PREMIUM', price: '$1,620', was: '$1800', features: ['10 Pages', '3 Days', 'Advanced Features'] }
+        ];
+
+        packages.forEach((pkg, index) => {
+            const x = startX + (boxWidth + gap) * index;
+
+            // Box background
+            if (pkg.highlight) {
+                // Highlighted box with blue gradient
+                const highlightGradient = ctx.createLinearGradient(x, boxY, x, boxY + boxHeight);
+                highlightGradient.addColorStop(0, '#2563eb');
+                highlightGradient.addColorStop(1, '#1d4ed8');
+                ctx.fillStyle = highlightGradient;
+                ctx.shadowColor = 'rgba(37, 99, 235, 0.5)';
+                ctx.shadowBlur = 30;
+            } else {
+                ctx.fillStyle = '#1e293b';
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+            }
+
+            ctx.beginPath();
+            ctx.roundRect(x, boxY, boxWidth, boxHeight, 20);
+            ctx.fill();
+
+            ctx.shadowBlur = 0;
+
+            // Package name
+            ctx.fillStyle = pkg.highlight ? '#ffffff' : '#94a3b8';
+            ctx.font = 'bold 28px -apple-system, system-ui, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(pkg.name, x + boxWidth / 2, boxY + 45);
+
+            // Crossed out original price
+            ctx.fillStyle = pkg.highlight ? '#e2e8f0' : '#64748b';
+            ctx.font = '24px -apple-system, system-ui, sans-serif';
+            ctx.fillText(pkg.was, x + boxWidth / 2, boxY + 90);
+
+            // Strikethrough
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            const textWidth = ctx.measureText(pkg.was).width;
+            ctx.moveTo(x + boxWidth / 2 - textWidth / 2 - 10, boxY + 90);
+            ctx.lineTo(x + boxWidth / 2 + textWidth / 2 + 10, boxY + 90);
+            ctx.stroke();
+
+            // Sale price
+            ctx.fillStyle = pkg.highlight ? '#ffffff' : '#3b82f6';
+            ctx.font = 'bold 56px -apple-system, system-ui, sans-serif';
+            ctx.fillText(pkg.price, x + boxWidth / 2, boxY + 150);
+
+            // Features
+            ctx.font = '22px -apple-system, system-ui, sans-serif';
+            ctx.fillStyle = pkg.highlight ? '#e2e8f0' : '#cbd5e1';
+            pkg.features.forEach((feature, i) => {
+                ctx.fillText('✓ ' + feature, x + boxWidth / 2, boxY + 200 + (i * 30));
+            });
+        });
+
+        // Bottom CTA section
+        ctx.fillStyle = '#f1f5f9';
+        ctx.font = 'bold 44px -apple-system, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Book This Week & Save 10%', 600, 1050);
+
+        // Website URL
+        ctx.fillStyle = '#3b82f6';
+        ctx.font = 'bold 38px -apple-system, system-ui, sans-serif';
+        ctx.fillText('webdevpro.dev', 600, 1120);
+
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'webdevpro-facebook-ad.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>
