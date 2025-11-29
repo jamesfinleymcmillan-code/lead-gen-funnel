@@ -233,9 +233,9 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto">
-      <div className="min-h-screen flex items-center justify-center p-4 md:p-6">
-        <div className="bg-stone-900 border-2 border-blue-500/50 rounded-2xl max-w-4xl w-full shadow-2xl my-8">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto touch-pan-y overscroll-contain">
+      <div className="min-h-full flex items-start justify-center p-4 md:p-6 pt-8">
+        <div className="bg-stone-900 border-2 border-blue-500/50 rounded-2xl max-w-4xl w-full shadow-2xl mb-8">
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 rounded-t-2xl flex justify-between items-center">
           <div>
@@ -323,7 +323,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
+                  className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors text-base"
                   placeholder="John Smith"
                 />
               </div>
@@ -356,7 +356,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                   required
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
+                  className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors text-base"
                   placeholder="+1 (555) 000-0000"
                 />
               </div>
@@ -370,7 +370,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                   required
                   value={formData.businessName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
+                  className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors text-base"
                   placeholder="Your Business LLC"
                 />
               </div>
@@ -384,7 +384,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                 value={formData.projectDetails}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors resize-none"
+                className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors resize-none text-base"
                 placeholder="Tell us about your business, what features you need, color preferences, etc."
               />
             </div>
