@@ -71,6 +71,11 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
   useEffect(() => {
     if (isOpen) {
       setHasDiscount(isDiscountActive());
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
     }
   }, [isOpen]);
 
@@ -232,10 +237,21 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
     }
   };
 
+  const handleUrlBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    // Auto-add https:// when user finishes typing (only if they entered something)
+    if (e.target.value && !e.target.value.match(/^https?:\/\//i)) {
+      setFormData({
+        ...formData,
+        inspirationWebsite: 'https://' + e.target.value
+      });
+    }
+  };
+
+
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto touch-pan-y overscroll-contain">
-      <div className="min-h-full flex items-start justify-center p-4 md:p-6 pt-8">
-        <div className="bg-stone-900 border-2 border-blue-500/50 rounded-2xl max-w-4xl w-full shadow-2xl mb-8">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto">
+      <div className="min-h-screen px-4 py-8 flex items-start justify-center">
+        <div className="bg-stone-900 border-0 md:border-2 border-blue-500/50 rounded-2xl max-w-4xl w-full my-8 shadow-2xl">
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 rounded-t-2xl flex justify-between items-center">
           <div>
@@ -337,7 +353,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-stone-950 border rounded-lg text-stone-100 focus:outline-none transition-colors ${
+                  className={`w-full px-4 py-3 bg-stone-950 border rounded-lg text-stone-100 focus:outline-none transition-colors text-base ${
                     emailError ? 'border-red-500 focus:border-red-500' : 'border-stone-700 focus:border-blue-600'
                   }`}
                   placeholder="john@example.com"
@@ -397,8 +413,9 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                 name="inspirationWebsite"
                 value={formData.inspirationWebsite}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors"
-                placeholder="https://example.com"
+                onBlur={handleUrlBlur}
+                className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors text-base"
+                placeholder="example.com"
               />
               <p className="text-xs text-stone-500 mt-2">Share a link to a website whose design you love - helps us match your style</p>
             </div>

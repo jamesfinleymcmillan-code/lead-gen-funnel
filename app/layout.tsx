@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     icon: '/icon.svg?v=3',
     apple: '/icon.svg?v=3',
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
   openGraph: {
     title: "Professional Web Development - Get A Website That Brings You Customers",
     description: "Expert web development services for businesses. Custom websites, landing pages, and web applications built with Next.js.",
