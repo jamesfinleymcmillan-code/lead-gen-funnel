@@ -249,9 +249,9 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
 
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto">
-      <div className="min-h-screen px-4 py-8 flex items-start justify-center">
-        <div className="bg-stone-900 border-0 md:border-2 border-blue-500/50 rounded-2xl max-w-4xl w-full my-8 shadow-2xl">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto overscroll-none">
+      <div className="min-h-screen px-4 py-8">
+        <div className="bg-stone-900 border-0 md:border-2 border-blue-500/50 rounded-2xl max-w-4xl mx-auto shadow-2xl" style={{ transform: 'translateZ(0)' }}>
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 rounded-t-2xl flex justify-between items-center">
           <div>
@@ -340,6 +340,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors text-base"
+                  style={{ scrollMarginTop: '100px' }}
                   placeholder="John Smith"
                 />
               </div>
@@ -356,6 +357,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                   className={`w-full px-4 py-3 bg-stone-950 border rounded-lg text-stone-100 focus:outline-none transition-colors text-base ${
                     emailError ? 'border-red-500 focus:border-red-500' : 'border-stone-700 focus:border-blue-600'
                   }`}
+                  style={{ scrollMarginTop: '100px' }}
                   placeholder="john@example.com"
                 />
                 {emailError && (
@@ -373,6 +375,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                   value={formData.phone}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors text-base"
+                  style={{ scrollMarginTop: '100px' }}
                   placeholder="+1 (555) 000-0000"
                 />
               </div>
@@ -387,6 +390,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                   value={formData.businessName}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors text-base"
+                  style={{ scrollMarginTop: '100px' }}
                   placeholder="Your Business LLC"
                 />
               </div>
@@ -401,6 +405,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                 onChange={handleChange}
                 rows={4}
                 className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors resize-none text-base"
+                style={{ scrollMarginTop: '100px' }}
                 placeholder="Tell us about your business, what features you need, color preferences, etc."
               />
             </div>
@@ -415,6 +420,7 @@ export default function CheckoutModal({ isOpen, onClose, packageName, basePrice,
                 onChange={handleChange}
                 onBlur={handleUrlBlur}
                 className="w-full px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 focus:outline-none focus:border-blue-600 transition-colors text-base"
+                style={{ scrollMarginTop: '100px' }}
                 placeholder="example.com"
               />
               <p className="text-xs text-stone-500 mt-2">Share a link to a website whose design you love - helps us match your style</p>
