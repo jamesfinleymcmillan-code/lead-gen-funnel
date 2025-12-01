@@ -364,11 +364,13 @@ export default function Home() {
               <div className="bg-gradient-to-br from-stone-800 to-stone-900 p-8 md:p-12 flex items-center justify-center">
                 <div className="w-full aspect-video bg-stone-950 border-2 border-stone-700 rounded-lg overflow-hidden relative hover:border-blue-500/50 transition-colors">
                   <Image
-                    src="/net-money-screenshot.png"
+                    src="/net-money-screenshot.webp"
                     alt="Net Money Group website screenshot - exclusive networking platform"
                     fill
                     className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                    quality={85}
                   />
                 </div>
               </div>
